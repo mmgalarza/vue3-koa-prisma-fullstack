@@ -1,118 +1,115 @@
-# Sistema de Gestión - Full Stack (Vue 3 + Koa + Prisma)
+# Sistema de Gestión Full-Stack - NodeTS & Vue 3
 
-Proyecto full‑stack orientado a demostrar dominio de desarrollo web moderno. Incluye un **frontend SPA** en Vue 3 + Vite y un **backend API** en Koa + Prisma con PostgreSQL.
+Proyecto profesional orientado a demostrar dominio técnico en desarrollo web moderno. Se trata de una solución integral con **arquitectura desacoplada**, seguridad de tipos de extremo a extremo y un diseño modular por dominios.
 
-## Demo (opcional)
-> Agregá aquí los links públicos si lo desplegás (Render/Railway/Vercel, etc.).
+## 🚀 Stack Tecnológico & Arquitectura
 
-## Stack
-**Frontend**
-- Vue 3 + Vite
-- Vuetify + Tailwind
-- Pinia + Vue Router
+El proyecto se basa en un ecosistema **Fullstack Moderno (NodeTS)**, diseñado con un enfoque de arquitectura desacoplada y seguridad de tipos de extremo a extremo (*End-to-End Type Safety*).
 
-**Backend**
-- Node.js + TypeScript (ESM)
-- Koa + Router + Bodyparser
-- Prisma ORM + PostgreSQL
-- Zod (validación)
-- JWT + OAuth2 (emails)
-- Swagger UI
+### 🛠️ Tecnologías Principales
 
-## Características principales
-- Autenticación y manejo de sesiones (JWT)
-- Registro/activación de cuenta y reset de contraseña por email
-- CRUD de usuarios, clientes, categorías, productos y operaciones
-- Documentación de API con Swagger
-- Arquitectura modular (módulos por dominio)
+| Capa | Tecnología | Rol / Descripción |
+| :--- | :--- | :--- |
+| **Frontend** | Vue 3 + Vite | SPA de alto rendimiento con Composition API. |
+| **Marcado** | Pug | Sintaxis limpia y minimalista para templates Vue. |
+| **UI Kit** | Vuetify 3.5+ | Componentes Material Design y soporte Tailwind CSS. |
+| **Estado** | Pinia | Gestión de estado global modular y tipada. |
+| **Backend** | Koa.js | Servidor ligero basado en middleware para la API. |
+| **ORM** | Prisma | Gestión de PostgreSQL con seguridad de tipos estricta. |
+| **Validación** | Zod | Validación de esquemas e inferencia de tipos (SSOT). |
+| **Auth** | JWT | Flujo de seguridad |
+| **Docs** | Swagger UI | Documentación interactiva de los endpoints. |
 
-## Estructura del repositorio
-```
-/ (raíz)
-├─ back/    -> API (Koa + Prisma)
-├─ front/   -> SPA (Vue 3 + Vite)
-├─ common/  -> contratos y tipos compartidos
-└─ commands/, prompts/, respaldos/
-```
+---
 
-## Requisitos
-- Node.js 18+
-- PostgreSQL
+### 📐 Arquitectura del Sistema
 
-## Configuración rápida
-### 1) Backend
-```powershell
-cd d:\vue\back
-npm install
-```
+La aplicación sigue un diseño **desacoplado y organizado por capas**, lo que permite separar la lógica de infraestructura de la lógica de negocio:
 
-Crear `.env` en `back/`:
-```
-DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DB?schema=public"
-PORT=3000
-NODE_ENV=development
+#### 1. Frontend (Capa de Presentación)
+* **Vite + Vue 3:** Compilación ultra rápida y reactividad nativa.
+* **Pug Templates:** Sintaxis limpia y minimalista para el marcado HTML.
+* **Pinia Stores:** Desacoplamiento de la lógica de estado de los componentes UI.
 
-JWT_SECRET=tu_secreto
-ACTIVATION_JWT_SECRET=tu_secreto_activacion
+#### 2. Backend (Capa de Servidor)
+Para evitar el código fuertemente acoplado, el backend se estructura en:
+* **Controllers/Routes (Koa):** Gestión de peticiones y respuestas HTTP.
+* **Validation (Zod):** Contratos de datos estrictos para entrada/salida.
+* **Services Layer:** Contiene la lógica de negocio pura, agnóstica a Koa.
+* **Data Access (Prisma):** Abstracción de la base de datos mediante tipos generados.
 
-FRONTEND_URL=http://localhost:5173
-SPA_URL=http://localhost:5173
-
-MAIL_ENABLED=false
-MAIL_USER=tu_correo@gmail.com
-MAIL_FROM="Proyecto <tu_correo@gmail.com>"
-GOOGLE_CLIENT_ID=...
-GOOGLE_CLIENT_SECRET=...
-GOOGLE_REFRESH_TOKEN=...
+```mermaid
+graph LR
+  subgraph Client
+    Vue(Vue 3 + Pug) --> Pinia(Pinia Store)
+  end
+  
+  Pinia --> |JSON API| Koa(Koa.js)
+  
+  subgraph Server
+    Koa --> Zod(Zod Validation)
+    Zod --> Service(Services Layer)
+    Service --> Prisma(Prisma Client)
+  end
+  
+  Prisma --> DB[(PostgreSQL)]
 ```
 
-Opcional (migraciones y cliente):
-```powershell
-npx prisma generate
-npx prisma migrate dev
+### 🖥️ Frontend (Capa de Presentación)
+- **Desacoplamiento:** Uso de **Pinia Stores** para separar la lógica de estado de la interfaz de usuario.
+- **Templates:** Uso de **Pug** para un código de componentes más legible y estructurado.
+- **Reactividad:** Implementación nativa con Vue 3 y Vite para una experiencia de usuario instantánea.
+
+### ⚙️ Backend (Capa de Servidor)
+Estructura modular dividida en responsabilidades claras:
+1. **Controllers/Routes (Koa):** Puntos de entrada que gestionan peticiones HTTP.
+2. **Validation (Zod):** Contratos estrictos que actúan como "guardianes" de datos.
+3. **Services Layer:** Capa agnóstica donde reside la lógica de negocio pura.
+4. **Data Access (Prisma):** Abstracción de la base de datos mediante tipos generados automáticamente.
+
+## 📂 Estructura del Repositorio`
+
+```
+/ (raíz)  
+├─ back/      -> API Layer (Koa + Prisma + Zod)  
+├─ front/     -> Client Layer (Vue 3 + Vuetify + Pug)  
+├─ common/    -> Shared (Contratos de validación y tipos compartidos)  
+├─ docs/      -> Documentación técnica y capturas de pantalla  
+└─ commands/  -> Scripts de automatización y respaldos  
 ```
 
-Levantar API:
-```powershell
-npm run dev
-```
+## 🛠️ Configuración y Requisitos
 
-Swagger UI: `http://localhost:3000`
+**Requisitos previos:** Node.js 18+ y PostgreSQL activo.
 
-### 2) Frontend
-```powershell
-cd d:\vue\front
-npm install
-npm run dev
-```
+### 1. Backend (API)
+1. cd back
+2. npm install
+3. Configurar archivo .env:
+   DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DB?schema=public"
+   PORT=3000
+   JWT_SECRET=tu_secreto
+   MAIL_USER=tu_correo@gmail.com
+4. npx prisma generate
+5. npx prisma migrate dev
+6. npm run dev -> API activa en http://localhost:3000
 
-Aplicación: `http://localhost:5173`
+### 2. Frontend (SPA)
+1. cd front
+2. npm install
+3. npm run dev -> App activa en http://localhost:5173
 
-## Documentación adicional
-- Backend: `back/README.md`
-- Frontend: `front/README.md`
-- API Docs: `back/api-docs/`
-- CV/LinkedIn: `docs/demo.md`
+---
 
-## Screenshots
-> Reemplazá con capturas reales para tu CV.
-- `docs/ui-home.png`
-- `docs/ui-dashboard.png`
-- `docs/ui-productos.png`
-- `docs/ui-carrito.png`
-- `docs/swagger.png`
-- `docs/erd.png`
+## ✨ Características Principales
+- **Auth Flow:** Registro, activación por email y recuperación de contraseña (JWT).
+- **Gestión Integral:** CRUD completo de usuarios, clientes, categorías, productos y operaciones.
+- **Type Safety:** Detección de errores en tiempo de compilación gracias a TypeScript y Zod.
+- **Documentación:** API documentada con Swagger UI accesible en la raíz del backend.
 
-## Assets para CV
-- Guía y placeholders: `docs/README.md`
+## 👤 Autor
+- **Nombre:** Martin Miguel Galarza Continanza
+- **Contacto:** mmgalarza@gmail.com
+- **LinkedIn:** mmgalarza@gmail.com
 
-## Despliegue (ideas)
-- **Backend**: Render / Railway / Fly.io
-- **Frontend**: Vercel / Netlify
-
-## Autor
-- Nombre: Martin Miguel Galarza Continanza
-- Contacto: mmgalarza@gmail.com
-
-## Licencia
-MIT (o la que definas)
+---
