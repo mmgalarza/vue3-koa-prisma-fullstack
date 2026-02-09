@@ -1,0 +1,15 @@
+import * as z from 'zod';
+import type { Prisma } from '../../client';
+import { ProveedoresWhereUniqueInputObjectSchema as ProveedoresWhereUniqueInputObjectSchema } from './ProveedoresWhereUniqueInput.schema';
+import { ProveedoresUpdateWithoutEmpresaInputObjectSchema as ProveedoresUpdateWithoutEmpresaInputObjectSchema } from './ProveedoresUpdateWithoutEmpresaInput.schema';
+import { ProveedoresUncheckedUpdateWithoutEmpresaInputObjectSchema as ProveedoresUncheckedUpdateWithoutEmpresaInputObjectSchema } from './ProveedoresUncheckedUpdateWithoutEmpresaInput.schema';
+import { ProveedoresCreateWithoutEmpresaInputObjectSchema as ProveedoresCreateWithoutEmpresaInputObjectSchema } from './ProveedoresCreateWithoutEmpresaInput.schema';
+import { ProveedoresUncheckedCreateWithoutEmpresaInputObjectSchema as ProveedoresUncheckedCreateWithoutEmpresaInputObjectSchema } from './ProveedoresUncheckedCreateWithoutEmpresaInput.schema'
+
+const makeSchema = () => z.object({
+  where: z.lazy(() => ProveedoresWhereUniqueInputObjectSchema),
+  update: z.union([z.lazy(() => ProveedoresUpdateWithoutEmpresaInputObjectSchema), z.lazy(() => ProveedoresUncheckedUpdateWithoutEmpresaInputObjectSchema)]),
+  create: z.union([z.lazy(() => ProveedoresCreateWithoutEmpresaInputObjectSchema), z.lazy(() => ProveedoresUncheckedCreateWithoutEmpresaInputObjectSchema)])
+}).strict();
+export const ProveedoresUpsertWithWhereUniqueWithoutEmpresaInputObjectSchema: z.ZodType<Prisma.ProveedoresUpsertWithWhereUniqueWithoutEmpresaInput> = makeSchema() as unknown as z.ZodType<Prisma.ProveedoresUpsertWithWhereUniqueWithoutEmpresaInput>;
+export const ProveedoresUpsertWithWhereUniqueWithoutEmpresaInputObjectZodSchema = makeSchema();

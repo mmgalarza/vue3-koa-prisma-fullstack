@@ -1,0 +1,30 @@
+/* MENU */
+.menu {
+    list-style: none;
+    margin: 0;
+    width: 100%;
+    padding: 2px 0;
+}
+
+.menu a {
+    display: block;
+    padding: 4px;
+    text-decoration: none;
+    font-family: system-ui, sans-serif;
+    font-size: 15px;
+    color: #333;
+    transition: 0.25s;
+}
+
+.menu a:hover {
+    background: #0000007d;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.menu .activo,
+.menu .activo:hover {
+    background: #1a4ed8;
+    color: #fff;
+    transform: none;
+}  

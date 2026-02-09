@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { ActividadOrderByWithRelationInputObjectSchema as ActividadOrderByWithRelationInputObjectSchema } from './objects/ActividadOrderByWithRelationInput.schema';
+import { ActividadWhereInputObjectSchema as ActividadWhereInputObjectSchema } from './objects/ActividadWhereInput.schema';
+import { ActividadWhereUniqueInputObjectSchema as ActividadWhereUniqueInputObjectSchema } from './objects/ActividadWhereUniqueInput.schema';
+import { ActividadCountAggregateInputObjectSchema as ActividadCountAggregateInputObjectSchema } from './objects/ActividadCountAggregateInput.schema';
+import { ActividadMinAggregateInputObjectSchema as ActividadMinAggregateInputObjectSchema } from './objects/ActividadMinAggregateInput.schema';
+import { ActividadMaxAggregateInputObjectSchema as ActividadMaxAggregateInputObjectSchema } from './objects/ActividadMaxAggregateInput.schema';
+import { ActividadAvgAggregateInputObjectSchema as ActividadAvgAggregateInputObjectSchema } from './objects/ActividadAvgAggregateInput.schema';
+import { ActividadSumAggregateInputObjectSchema as ActividadSumAggregateInputObjectSchema } from './objects/ActividadSumAggregateInput.schema';
+
+export const ActividadAggregateSchema: z.ZodType<Prisma.ActividadAggregateArgs> = z.object({ orderBy: z.union([ActividadOrderByWithRelationInputObjectSchema, ActividadOrderByWithRelationInputObjectSchema.array()]).optional(), where: ActividadWhereInputObjectSchema.optional(), cursor: ActividadWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), ActividadCountAggregateInputObjectSchema ]).optional(), _min: ActividadMinAggregateInputObjectSchema.optional(), _max: ActividadMaxAggregateInputObjectSchema.optional(), _avg: ActividadAvgAggregateInputObjectSchema.optional(), _sum: ActividadSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.ActividadAggregateArgs>;
+
+export const ActividadAggregateZodSchema = z.object({ orderBy: z.union([ActividadOrderByWithRelationInputObjectSchema, ActividadOrderByWithRelationInputObjectSchema.array()]).optional(), where: ActividadWhereInputObjectSchema.optional(), cursor: ActividadWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), ActividadCountAggregateInputObjectSchema ]).optional(), _min: ActividadMinAggregateInputObjectSchema.optional(), _max: ActividadMaxAggregateInputObjectSchema.optional(), _avg: ActividadAvgAggregateInputObjectSchema.optional(), _sum: ActividadSumAggregateInputObjectSchema.optional() }).strict();

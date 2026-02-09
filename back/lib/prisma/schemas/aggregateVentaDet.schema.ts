@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { VentaDetOrderByWithRelationInputObjectSchema as VentaDetOrderByWithRelationInputObjectSchema } from './objects/VentaDetOrderByWithRelationInput.schema';
+import { VentaDetWhereInputObjectSchema as VentaDetWhereInputObjectSchema } from './objects/VentaDetWhereInput.schema';
+import { VentaDetWhereUniqueInputObjectSchema as VentaDetWhereUniqueInputObjectSchema } from './objects/VentaDetWhereUniqueInput.schema';
+import { VentaDetCountAggregateInputObjectSchema as VentaDetCountAggregateInputObjectSchema } from './objects/VentaDetCountAggregateInput.schema';
+import { VentaDetMinAggregateInputObjectSchema as VentaDetMinAggregateInputObjectSchema } from './objects/VentaDetMinAggregateInput.schema';
+import { VentaDetMaxAggregateInputObjectSchema as VentaDetMaxAggregateInputObjectSchema } from './objects/VentaDetMaxAggregateInput.schema';
+import { VentaDetAvgAggregateInputObjectSchema as VentaDetAvgAggregateInputObjectSchema } from './objects/VentaDetAvgAggregateInput.schema';
+import { VentaDetSumAggregateInputObjectSchema as VentaDetSumAggregateInputObjectSchema } from './objects/VentaDetSumAggregateInput.schema';
+
+export const VentaDetAggregateSchema: z.ZodType<Prisma.VentaDetAggregateArgs> = z.object({ orderBy: z.union([VentaDetOrderByWithRelationInputObjectSchema, VentaDetOrderByWithRelationInputObjectSchema.array()]).optional(), where: VentaDetWhereInputObjectSchema.optional(), cursor: VentaDetWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), VentaDetCountAggregateInputObjectSchema ]).optional(), _min: VentaDetMinAggregateInputObjectSchema.optional(), _max: VentaDetMaxAggregateInputObjectSchema.optional(), _avg: VentaDetAvgAggregateInputObjectSchema.optional(), _sum: VentaDetSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.VentaDetAggregateArgs>;
+
+export const VentaDetAggregateZodSchema = z.object({ orderBy: z.union([VentaDetOrderByWithRelationInputObjectSchema, VentaDetOrderByWithRelationInputObjectSchema.array()]).optional(), where: VentaDetWhereInputObjectSchema.optional(), cursor: VentaDetWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), VentaDetCountAggregateInputObjectSchema ]).optional(), _min: VentaDetMinAggregateInputObjectSchema.optional(), _max: VentaDetMaxAggregateInputObjectSchema.optional(), _avg: VentaDetAvgAggregateInputObjectSchema.optional(), _sum: VentaDetSumAggregateInputObjectSchema.optional() }).strict();

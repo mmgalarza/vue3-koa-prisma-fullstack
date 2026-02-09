@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ES2023",
+    "strict": true,
+    "esModuleInterop": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "baseUrl": "src",              // <--- clave
+    "paths": {
+      "@common/*": ["common/*"],   // apunta al symlink dentro de src
+      "@prisma/*": ["prisma/*"], // apunta al código fuente de prisma
+      "@utils/*": ["utils/*"],     // apunta a la carpeta utils
+      "@modulos/*": ["modulos/*"]  // apunta a la carpeta modulos
+    }
+  },
+  "include": ["src/**/*.ts", "prisma.config.ts", "prisma/**/*.ts", "script.ts", "src/modulos/categorias/dto.ts"],
+  "exclude": ["node_modules"]
+}

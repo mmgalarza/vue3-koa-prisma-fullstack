@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: Ventas API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /api/dashboard/ventas:
+    post:
+      tags: [Ventas, Dashboard]
+      summary: Crea una venta y descuenta stock FINAL
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [idProducto, cantidad, idAlmacen, idListaPvp]
+              properties:
+                idProducto: { type: integer, minimum: 1 }
+                cantidad: { type: number, exclusiveMinimum: 0 }
+                idAlmacen: { type: integer, minimum: 1 }
+                idListaPvp: { type: integer, minimum: 1 }
+      responses:
+        "201":
+          description: Venta creada (shape exacto pendiente de confirmar)
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        "400":
+          description: Body inválido / regla de negocio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }

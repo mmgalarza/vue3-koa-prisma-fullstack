@@ -1,0 +1,160 @@
+openapi: 3.0.3
+info:
+  title: Producto Imágenes API
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    ProductoImagen:
+      type: object
+      properties:
+        id:
+          type: integer
+        idProducto:
+          type: integer
+        url:
+          type: string
+        orden:
+          type: integer
+        principal:
+          type: boolean
+        activo:
+          type: boolean
+
+paths:
+  /api/productos/imagenes:
+    get:
+      tags: [Public]
+      summary: Lista todas las imágenes de productos
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProductoImagen"
+
+    post:
+      tags: [Dashboard]
+      summary: Crea una imagen de producto (ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [idProducto, url]
+              properties:
+                idProducto:
+                  type: integer
+                  minimum: 1
+                url:
+                  type: string
+                orden:
+                  type: integer
+                principal:
+                  type: boolean
+                activo:
+                  type: boolean
+      responses:
+        "200":
+          description: Creada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductoImagen"
+        "400":
+          description: Validación / regla de negocio
+        "401":
+          description: Sin token / token inválido
+        "403":
+          description: No admin
+
+  /api/productos/imagenes/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+
+    get:
+      tags: [Public]
+      summary: Obtiene una imagen por id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductoImagen"
+
+    patch:
+      tags: [Dashboard]
+      summary: Actualiza una imagen de producto (ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                orden:
+                  type: integer
+                principal:
+                  type: boolean
+                activo:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductoImagen"
+        "400":
+          description: Validación / regla de negocio
+        "401":
+          description: Sin token / token inválido
+        "403":
+          description: No admin
+
+    delete:
+      tags: [Dashboard]
+      summary: Elimina una imagen de producto (ADMIN)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        "401":
+          description: Sin token / token inválido
+        "403":
+          description: No admin

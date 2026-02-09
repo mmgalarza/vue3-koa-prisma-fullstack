@@ -1,0 +1,29 @@
+<template lang="pug">
+ul(:class="listClass" role="menu")
+  li(v-for="item in items" :key="item.text")
+    template(v-if="!item.submenu")
+      a(:href="item.href", role="menuitem") {{ item.text }}
+    template(v-else)
+      details(:class="moreClass", aria-haspopup="true")
+        summary(aria-expanded="false") {{ item.text }}
+        ul(:class="submenuClass", role="menu")
+          li(v-for="sub in item.submenu" :key="sub.text")
+            a(:href="sub.href", role="menuitem") {{ sub.text }}
+</template>
+
+<script setup>
+const {items, orientation} = defineProps({
+  items: {
+    type: Array,
+    required: true
+  },
+  orientation: {
+    type: String,
+    default: "horizontal" // o "vertical"
+  }
+})
+
+const listClass = orientation === "vertical" ? "vertical-menu" : "menu-horizontal"
+const moreClass = orientation === "vertical" ? "nav-more-vertical" : "nav-more"
+const submenuClass = orientation === "vertical" ? "submenu-vertical" : "submenu"
+</script>

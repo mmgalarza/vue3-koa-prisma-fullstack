@@ -1,0 +1,37 @@
+    /* ================= FX BASE ================= */
+    .fx {
+      transition: all 0.3s ease-in-out;
+      will-change: transform, box-shadow, filter;
+      cursor: pointer;
+    }
+
+    /* ================= SHADOWS ================= */
+    .fx-shadow-sm { box-shadow: 0 2px 6px rgba(0,0,0,0.12); }
+    .fx-shadow-md { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .fx-shadow-lg { box-shadow: 0 8px 25px rgba(0,0,0,0.18); }
+    .fx-shadow-xl { box-shadow: 0 12px 35px rgba(0,0,0,0.22); }
+
+    /* ================= HOVER EFFECTS ================= */
+    .fx-hover-lift:hover { transform: translateY(-2px); }
+    .fx-hover-scale:hover { transform: scale(1.27); }
+    .fx-hover-rotate:hover { transform: rotate(-10deg); }
+    .fx-hover-bright:hover { filter: brightness(1.1); }
+
+    /* ================= ANIMATIONS ================= */
+    .fx-bounce { animation: fx-bounce 1s ease infinite alternate; }
+    .fx-hover-bounce:hover { animation: fx-bounce 1s ease infinite alternate; }
+    @keyframes fx-bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-5px); } }
+
+    .fx-pulse { animation: fx-pulse 1.5s ease-in-out infinite; }
+    @keyframes fx-pulse { 0%,100% { transform: scale(1); opacity:1; } 50% { transform: scale(1.05); opacity:0.9; } }
+
+    /* ================= GLOW ================= */
+    .fx-glow-sm:hover { box-shadow: 0 0 6px rgba(0,150,255,0.4); }
+    .fx-glow-md:hover { box-shadow: 0 0 12px rgba(0,150,255,0.5); }
+    .fx-glow-lg:hover { box-shadow: 0 0 20px rgba(0,150,255,0.6); }
+
+    /* ================= OTHER EFFECTS ================= */
+    .fx-blur:hover { filter: blur(1px); }
+    .fx-grayscale:hover { filter: grayscale(0.5); }
+    .fx-invert:hover { filter: invert(1); }
+    .fx-opacity:hover { opacity: 0.8; }

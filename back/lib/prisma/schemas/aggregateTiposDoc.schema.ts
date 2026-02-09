@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { TiposDocOrderByWithRelationInputObjectSchema as TiposDocOrderByWithRelationInputObjectSchema } from './objects/TiposDocOrderByWithRelationInput.schema';
+import { TiposDocWhereInputObjectSchema as TiposDocWhereInputObjectSchema } from './objects/TiposDocWhereInput.schema';
+import { TiposDocWhereUniqueInputObjectSchema as TiposDocWhereUniqueInputObjectSchema } from './objects/TiposDocWhereUniqueInput.schema';
+import { TiposDocCountAggregateInputObjectSchema as TiposDocCountAggregateInputObjectSchema } from './objects/TiposDocCountAggregateInput.schema';
+import { TiposDocMinAggregateInputObjectSchema as TiposDocMinAggregateInputObjectSchema } from './objects/TiposDocMinAggregateInput.schema';
+import { TiposDocMaxAggregateInputObjectSchema as TiposDocMaxAggregateInputObjectSchema } from './objects/TiposDocMaxAggregateInput.schema';
+import { TiposDocAvgAggregateInputObjectSchema as TiposDocAvgAggregateInputObjectSchema } from './objects/TiposDocAvgAggregateInput.schema';
+import { TiposDocSumAggregateInputObjectSchema as TiposDocSumAggregateInputObjectSchema } from './objects/TiposDocSumAggregateInput.schema';
+
+export const TiposDocAggregateSchema: z.ZodType<Prisma.TiposDocAggregateArgs> = z.object({ orderBy: z.union([TiposDocOrderByWithRelationInputObjectSchema, TiposDocOrderByWithRelationInputObjectSchema.array()]).optional(), where: TiposDocWhereInputObjectSchema.optional(), cursor: TiposDocWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), TiposDocCountAggregateInputObjectSchema ]).optional(), _min: TiposDocMinAggregateInputObjectSchema.optional(), _max: TiposDocMaxAggregateInputObjectSchema.optional(), _avg: TiposDocAvgAggregateInputObjectSchema.optional(), _sum: TiposDocSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.TiposDocAggregateArgs>;
+
+export const TiposDocAggregateZodSchema = z.object({ orderBy: z.union([TiposDocOrderByWithRelationInputObjectSchema, TiposDocOrderByWithRelationInputObjectSchema.array()]).optional(), where: TiposDocWhereInputObjectSchema.optional(), cursor: TiposDocWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), TiposDocCountAggregateInputObjectSchema ]).optional(), _min: TiposDocMinAggregateInputObjectSchema.optional(), _max: TiposDocMaxAggregateInputObjectSchema.optional(), _avg: TiposDocAvgAggregateInputObjectSchema.optional(), _sum: TiposDocSumAggregateInputObjectSchema.optional() }).strict();

@@ -1,0 +1,112 @@
+<template lang="pug">
+div(class="min-h-full flex flex-col justify-center items-center px-6 py-12 lg:px-8")
+  div(class="sm:mx-auto sm:w-full sm:max-w-sm")
+    LogoSvg.mx-auto.h-20.w-auto(alt="Tu Empresa")
+    h2(class="mt-2 text-center font-domine-md text-2xl/9 font-bold tracking-tight text-gray-900") Inicia sesión en tu cuenta
+
+  div(class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm bg-white  rounded-md p-6 shadow-md")
+    form.space-y-6(@submit.prevent="handleLogin")
+      //- Email field
+      div
+        label(class="block text-sm/6 font-medium text-gray-900" for="email") Correo electrónico
+        div(class="mt-2")
+          input(class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" 
+            v-model="email" type="email" name="email" id="email" autocomplete="email" required)
+
+      //- Password field
+      div
+        .flex.items-center.justify-between
+          label(class="block text-sm/6 font-medium text-gray-900" for="password") Contraseña
+          .text-sm
+            a(class="font-semibold text-indigo-600 hover:text-indigo-500" href="#") ¿Olvidaste tu contraseña?
+        div(class="mt-2")
+          input(class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" 
+            v-model="password" type="password" name="password" id="password" autocomplete="current-password" required)
+
+      //- Login button
+      div
+        button(class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="submit") Iniciar sesión
+      //- OR separator
+      div.flex.items-center.my-4
+        hr.flex-1.border-t.border-gray-300
+        span.mx-2.text-gray-400.or o continua con
+        hr.flex-1.border-t.border-gray-300
+
+      //- Google OAuth button
+      div
+        button(class="flex items-center justify-center w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm/6 font-semibold text-gray-700 shadow-sm hover:bg-gray-50"
+          type="button" :disabled="loading" @click="handleGoogleLogin")
+          GoogleIcon(class="h-5 w-5 mr-2" aria-hidden="true")
+          | {{loading ? 'Cargando...' : 'Iniciar sesión con Google'}}
+      //- Error message
+      div(v-if="error" class="text-red-600 text-sm/6 mt-4") {{ error }}
+      //- Ok message
+      div(v-if="passed" class="text-green-600 text-sm/6 mt-4") {{ passed }}
+
+  p(class="mt-10 text-center text-sm/6 text-gray-500")
+    | ¿No tienes cuenta?
+    router-link(class="font-semibold text-indigo-600 hover:text-indigo-500" to="/registro") Registrate aquí
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { useUserStore } from '@/stores/user'
+import LogoSvg from '@/assets/images/icon/logo.svg?component';
+import GoogleIcon from '@/assets/images/icon/google.svg?component';
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const userStore = useUserStore()
+
+const email = ref('')
+const password = ref('')
+const loading = ref(false)
+const error = ref(null)
+const passed = ref(null)
+
+
+async function handleLogin() {
+  error.value = null
+  loading.value = true
+
+  try {
+    const res = await fetch('http://localhost:1337/api/auth/local', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        identifier: email.value,
+        password: password.value
+      })
+    })
+
+    if (!res.ok) {
+      throw new Error('Credenciales incorrectas')
+    }
+
+    const data = await res.json()
+
+    userStore.login({
+      jwt: data.jwt,
+      user: data.user
+    })
+
+    passed.value = 'Inicio de sesión exitoso'
+
+    router.push('/')
+
+  } catch (e) {
+    error.value = e.message
+  } finally {
+    loading.value = false
+  }
+}
+
+
+
+function handleGoogleLogin() {
+  window.location.href = '/api/auth/google'
+}
+
+</script>

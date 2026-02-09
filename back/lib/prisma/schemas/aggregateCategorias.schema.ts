@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { CategoriasOrderByWithRelationInputObjectSchema as CategoriasOrderByWithRelationInputObjectSchema } from './objects/CategoriasOrderByWithRelationInput.schema';
+import { CategoriasWhereInputObjectSchema as CategoriasWhereInputObjectSchema } from './objects/CategoriasWhereInput.schema';
+import { CategoriasWhereUniqueInputObjectSchema as CategoriasWhereUniqueInputObjectSchema } from './objects/CategoriasWhereUniqueInput.schema';
+import { CategoriasCountAggregateInputObjectSchema as CategoriasCountAggregateInputObjectSchema } from './objects/CategoriasCountAggregateInput.schema';
+import { CategoriasMinAggregateInputObjectSchema as CategoriasMinAggregateInputObjectSchema } from './objects/CategoriasMinAggregateInput.schema';
+import { CategoriasMaxAggregateInputObjectSchema as CategoriasMaxAggregateInputObjectSchema } from './objects/CategoriasMaxAggregateInput.schema';
+import { CategoriasAvgAggregateInputObjectSchema as CategoriasAvgAggregateInputObjectSchema } from './objects/CategoriasAvgAggregateInput.schema';
+import { CategoriasSumAggregateInputObjectSchema as CategoriasSumAggregateInputObjectSchema } from './objects/CategoriasSumAggregateInput.schema';
+
+export const CategoriasAggregateSchema: z.ZodType<Prisma.CategoriasAggregateArgs> = z.object({ orderBy: z.union([CategoriasOrderByWithRelationInputObjectSchema, CategoriasOrderByWithRelationInputObjectSchema.array()]).optional(), where: CategoriasWhereInputObjectSchema.optional(), cursor: CategoriasWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), CategoriasCountAggregateInputObjectSchema ]).optional(), _min: CategoriasMinAggregateInputObjectSchema.optional(), _max: CategoriasMaxAggregateInputObjectSchema.optional(), _avg: CategoriasAvgAggregateInputObjectSchema.optional(), _sum: CategoriasSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.CategoriasAggregateArgs>;
+
+export const CategoriasAggregateZodSchema = z.object({ orderBy: z.union([CategoriasOrderByWithRelationInputObjectSchema, CategoriasOrderByWithRelationInputObjectSchema.array()]).optional(), where: CategoriasWhereInputObjectSchema.optional(), cursor: CategoriasWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), CategoriasCountAggregateInputObjectSchema ]).optional(), _min: CategoriasMinAggregateInputObjectSchema.optional(), _max: CategoriasMaxAggregateInputObjectSchema.optional(), _avg: CategoriasAvgAggregateInputObjectSchema.optional(), _sum: CategoriasSumAggregateInputObjectSchema.optional() }).strict();

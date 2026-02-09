@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: Órdenes de Fabricación API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    OrdenFabricacion:
+      type: object
+      properties:
+        idOrden: { type: integer }
+        fecha: { type: string, format: date-time }
+        estado:
+          type: string
+          enum: [PLANIFICADA, EN_PROCESO, FINALIZADA, CANCELADA]
+        idProducto: { type: integer }
+        cantidadPlan: { type: number }
+        cantidadReal: { type: number, nullable: true }
+        idAlmacen: { type: integer }
+        observaciones: { type: string, nullable: true }
+paths:
+  /api/dashboard/ordenes-fabricacion:
+    post:
+      tags: [ÓrdenesFabricación, Dashboard]
+      summary: Crea una orden de fabricación (ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [idProducto, idAlmacen, cantidadPlan]
+              properties:
+                idProducto: { type: integer, minimum: 1 }
+                idAlmacen: { type: integer, minimum: 1 }
+                cantidadPlan: { type: number, exclusiveMinimum: 0 }
+      responses:
+        "201":
+          description: Creada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrdenFabricacion"
+        "400":
+          description: Validación / regla de negocio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+                  message: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+  /api/dashboard/ordenes-fabricacion/{id}/finalizar:
+    post:
+      tags: [ÓrdenesFabricación, Dashboard]
+      summary: Finaliza una orden y realiza movimientos de stock (ADMIN)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idOrden: { type: integer }
+                  cantidadProducida: { type: number }
+                  costoTotal: { type: number }
+                  costoUnitario: { type: number }
+        "400":
+          description: Validación / regla de negocio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+                  message: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }

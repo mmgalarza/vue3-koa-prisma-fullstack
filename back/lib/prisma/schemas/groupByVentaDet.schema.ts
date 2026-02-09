@@ -1,0 +1,15 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { VentaDetWhereInputObjectSchema as VentaDetWhereInputObjectSchema } from './objects/VentaDetWhereInput.schema';
+import { VentaDetOrderByWithAggregationInputObjectSchema as VentaDetOrderByWithAggregationInputObjectSchema } from './objects/VentaDetOrderByWithAggregationInput.schema';
+import { VentaDetScalarWhereWithAggregatesInputObjectSchema as VentaDetScalarWhereWithAggregatesInputObjectSchema } from './objects/VentaDetScalarWhereWithAggregatesInput.schema';
+import { VentaDetScalarFieldEnumSchema } from './enums/VentaDetScalarFieldEnum.schema';
+import { VentaDetCountAggregateInputObjectSchema as VentaDetCountAggregateInputObjectSchema } from './objects/VentaDetCountAggregateInput.schema';
+import { VentaDetMinAggregateInputObjectSchema as VentaDetMinAggregateInputObjectSchema } from './objects/VentaDetMinAggregateInput.schema';
+import { VentaDetMaxAggregateInputObjectSchema as VentaDetMaxAggregateInputObjectSchema } from './objects/VentaDetMaxAggregateInput.schema';
+import { VentaDetAvgAggregateInputObjectSchema as VentaDetAvgAggregateInputObjectSchema } from './objects/VentaDetAvgAggregateInput.schema';
+import { VentaDetSumAggregateInputObjectSchema as VentaDetSumAggregateInputObjectSchema } from './objects/VentaDetSumAggregateInput.schema';
+
+export const VentaDetGroupBySchema: z.ZodType<Prisma.VentaDetGroupByArgs> = z.object({ where: VentaDetWhereInputObjectSchema.optional(), orderBy: z.union([VentaDetOrderByWithAggregationInputObjectSchema, VentaDetOrderByWithAggregationInputObjectSchema.array()]).optional(), having: VentaDetScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(VentaDetScalarFieldEnumSchema), _count: z.union([ z.literal(true), VentaDetCountAggregateInputObjectSchema ]).optional(), _min: VentaDetMinAggregateInputObjectSchema.optional(), _max: VentaDetMaxAggregateInputObjectSchema.optional(), _avg: VentaDetAvgAggregateInputObjectSchema.optional(), _sum: VentaDetSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.VentaDetGroupByArgs>;
+
+export const VentaDetGroupByZodSchema = z.object({ where: VentaDetWhereInputObjectSchema.optional(), orderBy: z.union([VentaDetOrderByWithAggregationInputObjectSchema, VentaDetOrderByWithAggregationInputObjectSchema.array()]).optional(), having: VentaDetScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(VentaDetScalarFieldEnumSchema), _count: z.union([ z.literal(true), VentaDetCountAggregateInputObjectSchema ]).optional(), _min: VentaDetMinAggregateInputObjectSchema.optional(), _max: VentaDetMaxAggregateInputObjectSchema.optional(), _avg: VentaDetAvgAggregateInputObjectSchema.optional(), _sum: VentaDetSumAggregateInputObjectSchema.optional() }).strict();

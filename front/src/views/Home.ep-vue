@@ -1,0 +1,132 @@
+<template lang="pug">
+Hero(
+    title="Bienvenido a Mi Dashboard"
+    subtitle="Gestiona tus proyectos, equipos y reportes de manera eficiente."
+    cta="Comenzar"
+  )
+Layout(
+  :user="user"
+  :navigation="navigation"
+  :userNavigation="userNavigation"
+  title="Mi Dashboard"
+  :company="company"
+)
+    template(#header)
+      h1.text-3xl.font-bold Panel de Control
+
+    template(#main)
+      p Bienvenido al panel de control. Aquí puedes gestionar tus proyectos, equipos y reportes.
+      el-button(type="primary") Guardar
+      Navbar
+      ul.mt-4.space-y-2
+        - for(i=0; i<50; i++)
+          li
+            a.text-blue-600(href="#" class="hover:underline") Ver mis proyectos #{i}
+      Elnavigator(
+        :user="{ name: 'Juan', avatar: 'https://i.pravatar.cc/150' }"
+        :navigation="navigation"
+        :userNavigation="userNavigation"
+        :company="company"
+        :cb="MyCtrlOptions"
+        dark=true
+      )
+    template(#footer)
+      | &copy; 2024 Mi Empresa S.A. Todos los derechos reservados.
+      
+</template>
+
+<script setup>
+import Layout from "../components/Layout.vue";
+import Hero from "../components/Hero.vue";
+import LogoSvg from '@/assets/images/icon/logo.svg?component';
+import Elnavigator from "../components/Elnavegator.vue";
+
+import {useRouter} from 'vue-router'
+
+
+/* authentication */
+
+import { useUserStore } from '@/stores/user'
+import { ElMessage } from 'element-plus';
+import { sw } from "element-plus/es/locale/index.mjs";
+const router = useRouter()
+
+const params = new URLSearchParams(window.location.search)
+const jwt = params.get('jwt')
+
+if (jwt) {
+  const userStore = useUserStore()
+
+  userStore.login({ jwt })
+
+  // Limpias la URL
+  window.history.replaceState({}, '', window.location.pathname)
+}
+
+/*
+const user = {
+  name: 'Juan Pérez',
+  email: 'juan.perez@ejemplo.com',
+  imageUrl: 'https://randomuser.me/api/portraits/men/32.jpg'
+}
+*/
+const navigation = [
+  {
+    name: 'Proyectos',
+    href: '#',
+    current: false,
+    children: [
+      { name: 'Todos los proyectos', href: '#' },
+      { name: 'Proyectos activos', href: '#' },
+      { name: 'Proyectos archivados', href: '#' },
+    ]
+  },
+  { name: 'Equipo', href: '#', current: false, to: '/about' },
+  { name: 'Calendario', href: '#', current: false },
+  { name: 'Reportes', href: '#', current: false }
+]
+
+
+const userNavigation = [
+  { name: 'Perfil', href: '#' },
+  { name: 'Configuración', href: '#' },
+  { name: 'Cerrar sesión', href: '#' }
+]
+
+const company = {
+  name: 'Mi Empresa S.A.',
+  logoUrl: LogoSvg,
+  color: "inherit"
+}
+
+function MyCtrlOptions(item) {
+  console.log('Item seleccionado completo:', item)
+  //segun tipo de item
+  if (item.to) {
+    router.push(item.to)
+  } else if (item.href) {
+    window.scrollTo({
+      top: document.querySelector(item.href === '#' ? '#app' : item.href).offsetTop,
+      behavior: 'smooth'
+    });
+  } else {
+    console.log('Otro tipo de acción')
+    switch(item.index) {
+      case 'logo':
+        console.log('Logo clickeado')
+        break;
+      case 'login':
+        console.log('Iniciar sesión clickeado')
+        break;
+      default:
+        console.log('Acción no definida para:', item.index)
+    }
+  }
+  // router.push(item.href)  // si estás usando Vue Router
+  ElMessage({
+    message: `index: ${item.index} - nombre: ${item.name} Navegando a ${item.href} y ruta ${item.to? item.to : 'N/A'}`,
+    type: 'info',
+  });
+}
+
+</script>

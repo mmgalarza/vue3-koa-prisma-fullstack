@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>📘 API Docs</title>
+  <link rel="stylesheet" href="/swagger-ui.css" />
+</head>
+<body>
+  <div id="swagger-ui"></div>
+
+  <script src="/swagger-ui-bundle.js"></script>
+  <script src="/swagger-ui-standalone-preset.js"></script>
+
+  <script>
+    fetch("/docs/specs")
+      .then(res => res.json())
+      .then(urls => {
+        SwaggerUIBundle({
+          dom_id: "#swagger-ui",
+          deepLinking: true,
+          layout: "StandaloneLayout",
+          presets: [
+            SwaggerUIBundle.presets.apis,
+            SwaggerUIStandalonePreset
+          ],
+          urls
+        });
+      })
+      .catch(err => {
+        document.body.innerHTML =
+          "<h2>Error cargando documentación</h2>";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>

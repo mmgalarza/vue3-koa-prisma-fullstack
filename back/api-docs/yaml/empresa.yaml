@@ -1,0 +1,107 @@
+openapi: 3.0.3
+info:
+  title: Empresa API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Empresa:
+      type: object
+      properties:
+        idEmpresa: { type: integer }
+        nombre: { type: string }
+        email: { type: string, nullable: true }
+        calle: { type: string }
+        numero: { type: string, nullable: true }
+        ciudad: { type: string }
+        provincia: { type: string }
+        codigoPostal: { type: string }
+        pais: { type: string }
+        contacto: { type: string, nullable: true }
+        activo: { type: boolean }
+paths:
+  /api/empresa/:
+    get:
+      tags: [Empresa]
+      summary: Obtiene la empresa (público)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  empresa:
+                    $ref: "#/components/schemas/Empresa"
+  /api/dashboard/empresa:
+    put:
+      tags: [Empresa, Dashboard]
+      summary: Actualiza la empresa (ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [nombre]
+              properties:
+                nombre: { type: string, minLength: 2 }
+                email: { type: string, format: email }
+                calle: { type: string }
+                numero: { type: string }
+                ciudad: { type: string }
+                provincia: { type: string }
+                codigoPostal: { type: string }
+                pais: { type: string }
+                contacto: { type: string }
+                activo: { type: boolean }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  empresa:
+                    $ref: "#/components/schemas/Empresa"
+                  message:
+                    type: string
+        "400":
+          description: Body inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }

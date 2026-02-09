@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    /* Lenguaje */
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
+    /* Vue / Vite */
+    "jsx": "preserve",
+    "isolatedModules": true,
+    "useDefineForClassFields": true,
+
+    /* Paths */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@auth/*": ["src/app/auth/*"],
+      "@modulos/*": ["src/modulos/*"],
+      "@home/*": ["src/modulos/invitado/*"],
+      "@dashboard/*": ["src/modulos/admin/*"],
+      "@utils/*": ["src/utils/*"],
+      "@servicios/*": ["src/servicios/*"],
+      "@store/*": ["src/store/*"],
+      "@componentes/*": ["src/app/components/*"],
+      "@app/*": ["src/app/*"]
+    },
+
+    /* Tipado */
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Entorno */
+    "lib": ["ESNext", "DOM"],
+    "types": ["vite/client"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/app/*.vue"
+  ],
+  "exclude": ["node_modules"]
+}

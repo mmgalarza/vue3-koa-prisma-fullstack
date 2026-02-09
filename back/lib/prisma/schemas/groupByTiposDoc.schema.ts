@@ -1,0 +1,15 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { TiposDocWhereInputObjectSchema as TiposDocWhereInputObjectSchema } from './objects/TiposDocWhereInput.schema';
+import { TiposDocOrderByWithAggregationInputObjectSchema as TiposDocOrderByWithAggregationInputObjectSchema } from './objects/TiposDocOrderByWithAggregationInput.schema';
+import { TiposDocScalarWhereWithAggregatesInputObjectSchema as TiposDocScalarWhereWithAggregatesInputObjectSchema } from './objects/TiposDocScalarWhereWithAggregatesInput.schema';
+import { TiposDocScalarFieldEnumSchema } from './enums/TiposDocScalarFieldEnum.schema';
+import { TiposDocCountAggregateInputObjectSchema as TiposDocCountAggregateInputObjectSchema } from './objects/TiposDocCountAggregateInput.schema';
+import { TiposDocMinAggregateInputObjectSchema as TiposDocMinAggregateInputObjectSchema } from './objects/TiposDocMinAggregateInput.schema';
+import { TiposDocMaxAggregateInputObjectSchema as TiposDocMaxAggregateInputObjectSchema } from './objects/TiposDocMaxAggregateInput.schema';
+import { TiposDocAvgAggregateInputObjectSchema as TiposDocAvgAggregateInputObjectSchema } from './objects/TiposDocAvgAggregateInput.schema';
+import { TiposDocSumAggregateInputObjectSchema as TiposDocSumAggregateInputObjectSchema } from './objects/TiposDocSumAggregateInput.schema';
+
+export const TiposDocGroupBySchema: z.ZodType<Prisma.TiposDocGroupByArgs> = z.object({ where: TiposDocWhereInputObjectSchema.optional(), orderBy: z.union([TiposDocOrderByWithAggregationInputObjectSchema, TiposDocOrderByWithAggregationInputObjectSchema.array()]).optional(), having: TiposDocScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(TiposDocScalarFieldEnumSchema), _count: z.union([ z.literal(true), TiposDocCountAggregateInputObjectSchema ]).optional(), _min: TiposDocMinAggregateInputObjectSchema.optional(), _max: TiposDocMaxAggregateInputObjectSchema.optional(), _avg: TiposDocAvgAggregateInputObjectSchema.optional(), _sum: TiposDocSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.TiposDocGroupByArgs>;
+
+export const TiposDocGroupByZodSchema = z.object({ where: TiposDocWhereInputObjectSchema.optional(), orderBy: z.union([TiposDocOrderByWithAggregationInputObjectSchema, TiposDocOrderByWithAggregationInputObjectSchema.array()]).optional(), having: TiposDocScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(TiposDocScalarFieldEnumSchema), _count: z.union([ z.literal(true), TiposDocCountAggregateInputObjectSchema ]).optional(), _min: TiposDocMinAggregateInputObjectSchema.optional(), _max: TiposDocMaxAggregateInputObjectSchema.optional(), _avg: TiposDocAvgAggregateInputObjectSchema.optional(), _sum: TiposDocSumAggregateInputObjectSchema.optional() }).strict();

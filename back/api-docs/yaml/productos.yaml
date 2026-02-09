@@ -1,0 +1,271 @@
+openapi: 3.0.3
+info:
+  title: Productos API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Producto:
+      type: object
+      properties:
+        idProducto: { type: integer }
+        nombre: { type: string }
+        descripcion: { type: string, nullable: true }
+        rol:
+          type: string
+          enum: [BASE, FABRICADO]
+        activo: { type: boolean }
+        idCategoria: { type: integer }
+        categoria:
+          type: object
+          additionalProperties: true
+        componentes:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+paths:
+  /productos/:
+    get:
+      tags: [Productos]
+      summary: Lista productos activos
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Producto"
+  /productos/{id}:
+    get:
+      tags: [Productos]
+      summary: Obtiene un producto por id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Producto"
+        "400":
+          description: Id inválido / no existe
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+                  message: { type: string }
+  /productos/categoria/{idCategoria}:
+    get:
+      tags: [Productos]
+      summary: Lista productos activos por categoría
+      parameters:
+        - in: path
+          name: idCategoria
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Producto"
+  /api/dashboard/:
+    post:
+      tags: [Productos, Dashboard]
+      summary: Crea un producto (ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [nombre, rol, idCategoria]
+              properties:
+                nombre: { type: string, minLength: 1 }
+                descripcion: { type: string }
+                rol:
+                  type: string
+                  enum: [BASE, FABRICADO]
+                idCategoria: { type: integer, minimum: 1 }
+      responses:
+        "201":
+          description: Creado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Producto"
+        "400":
+          description: Validación / regla de negocio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+                  message: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+    get:
+      tags: [Productos, Dashboard]
+      summary: Lista productos (admin)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Producto"
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+  /api/dashboard/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema: { type: integer }
+    put:
+      tags: [Productos, Dashboard]
+      summary: Actualiza un producto (ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre: { type: string, minLength: 1 }
+                descripcion: { type: string }
+                rol:
+                  type: string
+                  enum: [BASE, FABRICADO]
+                idCategoria: { type: integer, minimum: 1 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Producto"
+        "400":
+          description: Validación / regla de negocio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+                  message: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+    get:
+      tags: [Productos, Dashboard]
+      summary: Obtiene producto por id (admin)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Producto"
+        "400":
+          description: Id inválido / no existe
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+                  message: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }

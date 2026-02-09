@@ -1,0 +1,15 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { ListaPvpWhereInputObjectSchema as ListaPvpWhereInputObjectSchema } from './objects/ListaPvpWhereInput.schema';
+import { ListaPvpOrderByWithAggregationInputObjectSchema as ListaPvpOrderByWithAggregationInputObjectSchema } from './objects/ListaPvpOrderByWithAggregationInput.schema';
+import { ListaPvpScalarWhereWithAggregatesInputObjectSchema as ListaPvpScalarWhereWithAggregatesInputObjectSchema } from './objects/ListaPvpScalarWhereWithAggregatesInput.schema';
+import { ListaPvpScalarFieldEnumSchema } from './enums/ListaPvpScalarFieldEnum.schema';
+import { ListaPvpCountAggregateInputObjectSchema as ListaPvpCountAggregateInputObjectSchema } from './objects/ListaPvpCountAggregateInput.schema';
+import { ListaPvpMinAggregateInputObjectSchema as ListaPvpMinAggregateInputObjectSchema } from './objects/ListaPvpMinAggregateInput.schema';
+import { ListaPvpMaxAggregateInputObjectSchema as ListaPvpMaxAggregateInputObjectSchema } from './objects/ListaPvpMaxAggregateInput.schema';
+import { ListaPvpAvgAggregateInputObjectSchema as ListaPvpAvgAggregateInputObjectSchema } from './objects/ListaPvpAvgAggregateInput.schema';
+import { ListaPvpSumAggregateInputObjectSchema as ListaPvpSumAggregateInputObjectSchema } from './objects/ListaPvpSumAggregateInput.schema';
+
+export const ListaPvpGroupBySchema: z.ZodType<Prisma.ListaPvpGroupByArgs> = z.object({ where: ListaPvpWhereInputObjectSchema.optional(), orderBy: z.union([ListaPvpOrderByWithAggregationInputObjectSchema, ListaPvpOrderByWithAggregationInputObjectSchema.array()]).optional(), having: ListaPvpScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(ListaPvpScalarFieldEnumSchema), _count: z.union([ z.literal(true), ListaPvpCountAggregateInputObjectSchema ]).optional(), _min: ListaPvpMinAggregateInputObjectSchema.optional(), _max: ListaPvpMaxAggregateInputObjectSchema.optional(), _avg: ListaPvpAvgAggregateInputObjectSchema.optional(), _sum: ListaPvpSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.ListaPvpGroupByArgs>;
+
+export const ListaPvpGroupByZodSchema = z.object({ where: ListaPvpWhereInputObjectSchema.optional(), orderBy: z.union([ListaPvpOrderByWithAggregationInputObjectSchema, ListaPvpOrderByWithAggregationInputObjectSchema.array()]).optional(), having: ListaPvpScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(ListaPvpScalarFieldEnumSchema), _count: z.union([ z.literal(true), ListaPvpCountAggregateInputObjectSchema ]).optional(), _min: ListaPvpMinAggregateInputObjectSchema.optional(), _max: ListaPvpMaxAggregateInputObjectSchema.optional(), _avg: ListaPvpAvgAggregateInputObjectSchema.optional(), _sum: ListaPvpSumAggregateInputObjectSchema.optional() }).strict();

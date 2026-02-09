@@ -1,0 +1,204 @@
+@import url('buttons.css');
+@import url('panel.css');
+@import url('menu.css');
+@import url('display.css');
+:root {
+    --sidebar-width-expanded: 300px;
+    --sidebar-width-contracted: 100px;
+}
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+}
+body { 
+    background: #f5f5f5;
+    font-family: 'Lato', sans-serif;
+}
+
+.container {
+    --sidebar-width: var(--sidebar-width-expanded);    
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr; /* sidebar flexible | main */
+    grid-template-rows: auto auto 1fr auto; /* hero | header | contenido | footer */
+    grid-template-areas:
+        "hero hero"
+        "header header"
+        "sidebar main"
+        "footer footer";
+    min-height: 100vh;
+    gap: 0
+}
+.hero {
+    grid-area: hero;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    overflow: hidden;
+    position: relative;
+    flex-direction: column;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  background: url('https://picsum.photos/1200/400') center/cover no-repeat black;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  /*transition: opacity 4s ease-in-out;*/
+  animation: fadeInBg 2s ease-in-out forwards;
+  z-index: 1;  
+}
+
+@keyframes fadeInBg {
+  to {
+    opacity: 1;
+  }
+}
+.hero * {
+  position: relative;
+  z-index: 2;
+}
+.hero-pie {
+    position: absolute;
+    bottom: 14px;
+}
+img.btn-down {
+    filter: invert(1);
+    width: 50px;
+    cursor: pointer;
+}
+.hero-body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.hero h1 {
+    font-size: larger;
+    filter: drop-shadow(2px 4px 6px black);
+}
+
+.hero p {
+    font-size: xx-large;
+    color: #f6ff92;
+    filter: drop-shadow(2px 4px 6px black);
+}
+img.btn-down:hover {
+    transform: translateY(-5px);
+    transition: scaleX(1.2);
+    transform: scale(1.2);
+    transition: all 0.3s ease-in-out;
+}
+header {
+    grid-area: header;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #333;
+    color: white;
+    padding: 0;
+}
+.sidebar {
+    grid-area: sidebar;
+    background: #eee;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+.main {
+    grid-area: main;
+    padding: 1rem;
+    background: #fff;
+}
+footer {
+    grid-area: footer;
+    background: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+#sd-expandida {
+    display: none;
+}
+.menu-btn {
+  display: inline-block;
+  padding: 8px 12px;
+  cursor: pointer;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  width: 100%;
+}
+#sd-expandida:checked ~ .menu-btn {
+    text-align: left;
+}
+#sd-expandida:checked ~ .menu-btn:after {
+  content: " Menu lateral";
+}
+.container:has(#sd-expandida:checked) {
+    --sidebar-width: var(--sidebar-width-expanded);
+}
+.container:has(#sd-expandida:not(:checked)) {
+    --sidebar-width: var(--sidebar-width-contracted);
+}
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto 1fr auto;
+        grid-template-areas:
+        "hero"
+        "header"
+        "sidebar"
+        "main"
+        "footer";
+    }
+    .sidebar { 
+        width: 100% !important; 
+    }
+}
+
+h1, h2, h3 {
+  font-family: 'Arvo', serif;
+}
+
+.sidebar-header {
+    background-color: #333333;
+    padding: 4px;
+}
+
+.sidebar-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 5px;
+}
+
+.sidebar-body .panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.logo, .social-icon {
+    filter: invert(1);
+}
+
+.footer-center {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .2em;
+}

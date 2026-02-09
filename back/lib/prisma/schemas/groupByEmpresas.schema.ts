@@ -1,0 +1,15 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { EmpresasWhereInputObjectSchema as EmpresasWhereInputObjectSchema } from './objects/EmpresasWhereInput.schema';
+import { EmpresasOrderByWithAggregationInputObjectSchema as EmpresasOrderByWithAggregationInputObjectSchema } from './objects/EmpresasOrderByWithAggregationInput.schema';
+import { EmpresasScalarWhereWithAggregatesInputObjectSchema as EmpresasScalarWhereWithAggregatesInputObjectSchema } from './objects/EmpresasScalarWhereWithAggregatesInput.schema';
+import { EmpresasScalarFieldEnumSchema } from './enums/EmpresasScalarFieldEnum.schema';
+import { EmpresasCountAggregateInputObjectSchema as EmpresasCountAggregateInputObjectSchema } from './objects/EmpresasCountAggregateInput.schema';
+import { EmpresasMinAggregateInputObjectSchema as EmpresasMinAggregateInputObjectSchema } from './objects/EmpresasMinAggregateInput.schema';
+import { EmpresasMaxAggregateInputObjectSchema as EmpresasMaxAggregateInputObjectSchema } from './objects/EmpresasMaxAggregateInput.schema';
+import { EmpresasAvgAggregateInputObjectSchema as EmpresasAvgAggregateInputObjectSchema } from './objects/EmpresasAvgAggregateInput.schema';
+import { EmpresasSumAggregateInputObjectSchema as EmpresasSumAggregateInputObjectSchema } from './objects/EmpresasSumAggregateInput.schema';
+
+export const EmpresasGroupBySchema: z.ZodType<Prisma.EmpresasGroupByArgs> = z.object({ where: EmpresasWhereInputObjectSchema.optional(), orderBy: z.union([EmpresasOrderByWithAggregationInputObjectSchema, EmpresasOrderByWithAggregationInputObjectSchema.array()]).optional(), having: EmpresasScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(EmpresasScalarFieldEnumSchema), _count: z.union([ z.literal(true), EmpresasCountAggregateInputObjectSchema ]).optional(), _min: EmpresasMinAggregateInputObjectSchema.optional(), _max: EmpresasMaxAggregateInputObjectSchema.optional(), _avg: EmpresasAvgAggregateInputObjectSchema.optional(), _sum: EmpresasSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.EmpresasGroupByArgs>;
+
+export const EmpresasGroupByZodSchema = z.object({ where: EmpresasWhereInputObjectSchema.optional(), orderBy: z.union([EmpresasOrderByWithAggregationInputObjectSchema, EmpresasOrderByWithAggregationInputObjectSchema.array()]).optional(), having: EmpresasScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(EmpresasScalarFieldEnumSchema), _count: z.union([ z.literal(true), EmpresasCountAggregateInputObjectSchema ]).optional(), _min: EmpresasMinAggregateInputObjectSchema.optional(), _max: EmpresasMaxAggregateInputObjectSchema.optional(), _avg: EmpresasAvgAggregateInputObjectSchema.optional(), _sum: EmpresasSumAggregateInputObjectSchema.optional() }).strict();

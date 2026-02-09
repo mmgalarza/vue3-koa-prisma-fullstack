@@ -1,0 +1,25 @@
+openapi: 3.0.3
+info:
+  title: API Docs (Koa + TypeScript)
+  version: "1.0.0"
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        message: { type: string }
+    ErrorError:
+      type: object
+      properties:
+        error: { type: string }
+paths: {}

@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { ListaPvpDetOrderByWithRelationInputObjectSchema as ListaPvpDetOrderByWithRelationInputObjectSchema } from './objects/ListaPvpDetOrderByWithRelationInput.schema';
+import { ListaPvpDetWhereInputObjectSchema as ListaPvpDetWhereInputObjectSchema } from './objects/ListaPvpDetWhereInput.schema';
+import { ListaPvpDetWhereUniqueInputObjectSchema as ListaPvpDetWhereUniqueInputObjectSchema } from './objects/ListaPvpDetWhereUniqueInput.schema';
+import { ListaPvpDetCountAggregateInputObjectSchema as ListaPvpDetCountAggregateInputObjectSchema } from './objects/ListaPvpDetCountAggregateInput.schema';
+import { ListaPvpDetMinAggregateInputObjectSchema as ListaPvpDetMinAggregateInputObjectSchema } from './objects/ListaPvpDetMinAggregateInput.schema';
+import { ListaPvpDetMaxAggregateInputObjectSchema as ListaPvpDetMaxAggregateInputObjectSchema } from './objects/ListaPvpDetMaxAggregateInput.schema';
+import { ListaPvpDetAvgAggregateInputObjectSchema as ListaPvpDetAvgAggregateInputObjectSchema } from './objects/ListaPvpDetAvgAggregateInput.schema';
+import { ListaPvpDetSumAggregateInputObjectSchema as ListaPvpDetSumAggregateInputObjectSchema } from './objects/ListaPvpDetSumAggregateInput.schema';
+
+export const ListaPvpDetAggregateSchema: z.ZodType<Prisma.ListaPvpDetAggregateArgs> = z.object({ orderBy: z.union([ListaPvpDetOrderByWithRelationInputObjectSchema, ListaPvpDetOrderByWithRelationInputObjectSchema.array()]).optional(), where: ListaPvpDetWhereInputObjectSchema.optional(), cursor: ListaPvpDetWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), ListaPvpDetCountAggregateInputObjectSchema ]).optional(), _min: ListaPvpDetMinAggregateInputObjectSchema.optional(), _max: ListaPvpDetMaxAggregateInputObjectSchema.optional(), _avg: ListaPvpDetAvgAggregateInputObjectSchema.optional(), _sum: ListaPvpDetSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.ListaPvpDetAggregateArgs>;
+
+export const ListaPvpDetAggregateZodSchema = z.object({ orderBy: z.union([ListaPvpDetOrderByWithRelationInputObjectSchema, ListaPvpDetOrderByWithRelationInputObjectSchema.array()]).optional(), where: ListaPvpDetWhereInputObjectSchema.optional(), cursor: ListaPvpDetWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), ListaPvpDetCountAggregateInputObjectSchema ]).optional(), _min: ListaPvpDetMinAggregateInputObjectSchema.optional(), _max: ListaPvpDetMaxAggregateInputObjectSchema.optional(), _avg: ListaPvpDetAvgAggregateInputObjectSchema.optional(), _sum: ListaPvpDetSumAggregateInputObjectSchema.optional() }).strict();

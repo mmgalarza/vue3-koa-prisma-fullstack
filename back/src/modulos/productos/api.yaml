@@ -1,0 +1,324 @@
+openapi: 3.0.3
+info:
+  title: Productos API
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    ProductoImagen:
+      type: object
+      required:
+        - idImagen
+        - url
+        - principal
+        - activo
+      properties:
+        idImagen:
+          type: integer
+        url:
+          type: string
+        alt:
+          type: string
+          nullable: true
+        orden:
+          type: integer
+        principal:
+          type: boolean
+        activo:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+    Producto:
+      type: object
+      required:
+        - idProducto
+        - nombre
+        - activo
+        - precios
+        - stock
+        - idCategoria
+      properties:
+        idProducto:
+          type: integer
+        nombre:
+          type: string
+        descripcion:
+          type: string
+          nullable: true
+        precios:
+          type: number
+          format: decimal
+        stock:
+          type: integer
+        activo:
+          type: boolean
+        idCategoria:
+          type: integer
+        categoria:
+          type: object
+          additionalProperties: true
+        imagenes:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductoImagen"
+          description: "Imágenes asociadas al producto (solo principal en lista, todas en detalle)"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+
+paths:
+  /api/productos/all:
+    get:
+      tags: [Productos]
+      summary: Lista todos los productos activos (público)
+      description: Obtiene todos los productos activos sin paginación
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Producto"
+              example:
+                - idProducto: 1
+                  nombre: "Producto 1"
+                  descripcion: "Descripción del producto"
+                  precios: 99.99
+                  stock: 50
+                  activo: true
+                  idCategoria: 1
+                  categoria:
+                    idCategoria: 1
+                    nombre: "Electrónica"
+                  imagenes:
+                    - idImagen: 1
+                      url: "https://example.com/imagen.jpg"
+                      orden: 1
+                - idProducto: 2
+                  nombre: "Producto 2"
+                  descripcion: "Otra descripción"
+                  precios: 149.99
+                  stock: 25
+                  activo: true
+                  idCategoria: 2
+                  categoria:
+                    idCategoria: 2
+                    nombre: "Hogar"
+  /api/productos:
+    get:
+      tags: [Productos]
+      summary: Lista productos activos con paginación (público)
+      description: |
+        Obtiene una lista paginada de productos activos.
+        Puede filtrarse por categoría mediante el parámetro `categoriaId`.
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Número de página
+          required: false
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+          description: Cantidad de items por página (máximo 100)
+          required: false
+        - in: query
+          name: categoriaId
+          schema:
+            type: integer
+          description: ID de categoría para filtrar productos
+          required: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    description: Lista de productos de la página actual
+                    items:
+                      $ref: "#/components/schemas/Producto"
+                  total:
+                    type: integer
+                    description: Total de productos que cumplen con los filtros
+                    example: 150
+                required:
+                  - items
+                  - total
+                example:
+                  items:
+                    - idProducto: 1
+                      nombre: "Producto 1"
+                      descripcion: "Descripción del producto"
+                      precios: 99.99
+                      stock: 50
+                      activo: true
+                      idCategoria: 1
+                      categoria:
+                        idCategoria: 1
+                        nombre: "Electrónica"
+                      imagenes:
+                        - idImagen: 1
+                          url: "https://example.com/imagen.jpg"
+                          orden: 1
+                    - idProducto: 2
+                      nombre: "Producto 2"
+                      descripcion: "Otra descripción"
+                      precios: 149.99
+                      stock: 25
+                      activo: true
+                      idCategoria: 2
+                      categoria:
+                        idCategoria: 2
+                        nombre: "Hogar"
+                      imagenes: []
+                  total: 150
+        "400":
+          description: Parámetros de consulta inválidos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                success: false
+                message: "Error de validación"
+                errors:
+                  - field: "page"
+                    message: "La página debe ser mayor o igual a 1"
+        "500":
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    post:
+      tags: [Productos]
+      summary: Crea un producto (ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - idCategoria
+              properties:
+                nombre:
+                  type: string
+                  minLength: 1
+                descripcion:
+                  type: string
+                precios:
+                  type: number
+                  minimum: 0
+                stock:
+                  type: integer
+                  minimum: 0
+                idCategoria:
+                  type: integer
+                  minimum: 1
+      responses:
+        "201":
+          description: Creado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Producto"
+        "400":
+          description: Validación / regla de negocio
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: No autenticado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/productos/categoria/{idCategoria}:
+    get:
+      tags: [Productos]
+      summary: Lista productos activos por categoría
+      parameters:
+        - in: path
+          name: idCategoria
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Producto"
+
+  /api/productos/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+
+    get:
+      tags: [Productos]
+      summary: Obtiene un producto por id (público)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Producto"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"

@@ -1,0 +1,359 @@
+openapi: 3.0.3
+info:
+  title: Categorías API
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Categoria:
+      type: object
+      required:
+        - idCategoria
+        - nombre
+        - tipo
+        - activo
+      properties:
+        idCategoria:
+          type: integer
+        nombre:
+          type: string
+        descripcion:
+          type: string
+          nullable: true
+        icono:
+          type: string
+          nullable: true
+        tipo:
+          type: string
+          enum: [FAMILIA, MADRE, HIJA]
+        activo:
+          type: boolean
+        idCategoriaPadre:
+          type: integer
+          nullable: true
+        subcategorias:
+          type: array
+          items:
+            $ref: "#/components/schemas/Categoria"
+
+paths:
+  /api/categorias:
+    get:
+      tags: [Dashboard]
+      summary: Devuelve el árbol familias → madres → hijas (solo activas)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  familias:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Categoria"
+
+    post:
+      tags: [Dashboard]
+      summary: Crea una categoría (ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - tipo
+              properties:
+                nombre:
+                  type: string
+                  minLength: 1
+                descripcion:
+                  type: string
+                icono:
+                  type: string
+                tipo:
+                  type: string
+                  enum: [FAMILIA, MADRE, HIJA]
+                idCategoriaPadre:
+                  type: integer
+                  nullable: true
+      responses:
+        "201":
+          description: Creada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoria"
+        "400":
+          description: Validación / regla de negocio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/categorias/madres:
+    get:
+      tags: [Dashboard]
+      summary: Lista categorías tipo MADRE
+      parameters:
+        - in: query
+          name: idFamilia
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  madres:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Categoria"
+
+  /api/categorias/hijas:
+    get:
+      tags: [Dashboard]
+      summary: Lista categorías tipo HIJA
+      parameters:
+        - in: query
+          name: idMadre
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hijas:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Categoria"
+
+  /api/categorias/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+
+    get:
+      tags: [Dashboard]
+      summary: Detalle de categoría por id (incluye subcategorías activas)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoria"
+        "400":
+          description: Id inválido o categoría no existe
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+    patch:
+      tags: [Dashboard]
+      summary: Actualiza una categoría (ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                descripcion:
+                  type: string
+                icono:
+                  type: string
+                activo:
+                  type: boolean
+                idCategoriaPadre:
+                  type: integer
+                  nullable: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoria"
+        "400":
+          description: Validación / regla de negocio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+    delete:
+      tags: [Dashboard]
+      summary: Elimina físicamente una categoría (ADMIN)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        "400":
+          description: Regla de negocio / validación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/categorias/{id}/desactivar:
+    patch:
+      tags: [Dashboard]
+      summary: Desactiva una categoría (ADMIN)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        "400":
+          description: Regla de negocio / validación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

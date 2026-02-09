@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "TiposPvp" ADD VALUE 'AUTOMATICO';

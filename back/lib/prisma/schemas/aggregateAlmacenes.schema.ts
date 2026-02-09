@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { AlmacenesOrderByWithRelationInputObjectSchema as AlmacenesOrderByWithRelationInputObjectSchema } from './objects/AlmacenesOrderByWithRelationInput.schema';
+import { AlmacenesWhereInputObjectSchema as AlmacenesWhereInputObjectSchema } from './objects/AlmacenesWhereInput.schema';
+import { AlmacenesWhereUniqueInputObjectSchema as AlmacenesWhereUniqueInputObjectSchema } from './objects/AlmacenesWhereUniqueInput.schema';
+import { AlmacenesCountAggregateInputObjectSchema as AlmacenesCountAggregateInputObjectSchema } from './objects/AlmacenesCountAggregateInput.schema';
+import { AlmacenesMinAggregateInputObjectSchema as AlmacenesMinAggregateInputObjectSchema } from './objects/AlmacenesMinAggregateInput.schema';
+import { AlmacenesMaxAggregateInputObjectSchema as AlmacenesMaxAggregateInputObjectSchema } from './objects/AlmacenesMaxAggregateInput.schema';
+import { AlmacenesAvgAggregateInputObjectSchema as AlmacenesAvgAggregateInputObjectSchema } from './objects/AlmacenesAvgAggregateInput.schema';
+import { AlmacenesSumAggregateInputObjectSchema as AlmacenesSumAggregateInputObjectSchema } from './objects/AlmacenesSumAggregateInput.schema';
+
+export const AlmacenesAggregateSchema: z.ZodType<Prisma.AlmacenesAggregateArgs> = z.object({ orderBy: z.union([AlmacenesOrderByWithRelationInputObjectSchema, AlmacenesOrderByWithRelationInputObjectSchema.array()]).optional(), where: AlmacenesWhereInputObjectSchema.optional(), cursor: AlmacenesWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), AlmacenesCountAggregateInputObjectSchema ]).optional(), _min: AlmacenesMinAggregateInputObjectSchema.optional(), _max: AlmacenesMaxAggregateInputObjectSchema.optional(), _avg: AlmacenesAvgAggregateInputObjectSchema.optional(), _sum: AlmacenesSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.AlmacenesAggregateArgs>;
+
+export const AlmacenesAggregateZodSchema = z.object({ orderBy: z.union([AlmacenesOrderByWithRelationInputObjectSchema, AlmacenesOrderByWithRelationInputObjectSchema.array()]).optional(), where: AlmacenesWhereInputObjectSchema.optional(), cursor: AlmacenesWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), AlmacenesCountAggregateInputObjectSchema ]).optional(), _min: AlmacenesMinAggregateInputObjectSchema.optional(), _max: AlmacenesMaxAggregateInputObjectSchema.optional(), _avg: AlmacenesAvgAggregateInputObjectSchema.optional(), _sum: AlmacenesSumAggregateInputObjectSchema.optional() }).strict();

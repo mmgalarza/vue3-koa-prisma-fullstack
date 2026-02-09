@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: Precios y Listas PVP API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ListaPvp:
+      type: object
+      properties:
+        idListaPvp: { type: integer }
+        nombre: { type: string }
+        criterio:
+          type: string
+          enum: [AUTOMATICO, MANUAL, COSTO_MARGEN, POR_CATEGORIA, PROMOCION]
+        fechaGen: { type: string, format: date-time }
+paths:
+  /api/dashboard/precios/generar-lista:
+    post:
+      tags: [Precios, Dashboard]
+      summary: Genera una lista de precios automática para productos FABRICADO (ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [nombre, margen]
+              properties:
+                nombre: { type: string, minLength: 1 }
+                margen:
+                  type: number
+                  minimum: 0
+                  description: Porcentaje (ej: 20 = 20%)
+                productosIds:
+                  type: array
+                  items: { type: integer }
+      responses:
+        "201":
+          description: Lista creada (no incluye items Precios)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaPvp"
+        "400":
+          description: Body inválido / regla de negocio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+                  message: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "403":
+          description: No admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }

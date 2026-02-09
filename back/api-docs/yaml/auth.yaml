@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: Auth API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /login:
+    post:
+      tags: [Auth]
+      summary: Autentica un usuario y devuelve un JWT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  minLength: 6
+      responses:
+        "200":
+          description: Login exitoso
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [message, user, token]
+                properties:
+                  message:
+                    type: string
+                  user:
+                    type: object
+                    required: [id, username, email, nombre, rol]
+                    properties:
+                      id: { type: integer }
+                      username: { type: string }
+                      email: { type: string, format: email }
+                      nombre: { type: string }
+                      rol:
+                        type: string
+                        enum: [ADMIN, CLIENTE, INVITADO]
+                  token:
+                    type: string
+        "400":
+          description: Body inválido / validación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+        "401":
+          description: Credenciales inválidas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+  /register:
+    post:
+      tags: [Auth]
+      summary: Registra un usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, email, password, nombre]
+              properties:
+                username:
+                  type: string
+                  minLength: 3
+                  maxLength: 50
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  minLength: 8
+                nombre:
+                  type: string
+                  minLength: 2
+                  maxLength: 80
+      responses:
+        "201":
+          description: Usuario registrado
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [message, user]
+                properties:
+                  message:
+                    type: string
+                  user:
+                    type: object
+                    required: [id, username, email, nombre, rol]
+                    properties:
+                      id: { type: integer }
+                      username: { type: string }
+                      email: { type: string, format: email }
+                      nombre: { type: string }
+                      rol:
+                        type: string
+                        enum: [ADMIN, CLIENTE, INVITADO]
+        "400":
+          description: Body inválido / validación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }

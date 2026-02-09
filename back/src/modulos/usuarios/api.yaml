@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: Usuarios API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        idUsuario: { type: integer }
+        username: { type: string }
+        email: { type: string, format: email }
+        password: { type: string }
+        nombre: { type: string }
+        activo: { type: boolean }
+        creadoEn: { type: string, format: date-time }
+        actualizadoEn: { type: string, format: date-time }
+        rol:
+          type: string
+          enum: [ADMIN, REGISTRADO]
+paths:
+  /usuarios:
+    get:
+      tags: [Dashboard]
+      summary: Lista usuarios
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: skip
+          schema: { type: integer, minimum: 0 }
+          required: false
+        - in: query
+          name: take
+          schema: { type: integer, minimum: 1, maximum: 100 }
+          required: false
+        - in: query
+          name: activo
+          schema: { type: boolean }
+          required: false
+        - in: query
+          name: search
+          schema: { type: string }
+          required: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Usuario"
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+  /usuarios/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema: { type: integer }
+    get:
+      tags: [Dashboard]
+      summary: Obtiene un usuario por id
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "404":
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+    patch:
+      tags: [Dashboard]
+      summary: Mismo handler que PUT
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: { type: string, minLength: 3 }
+                email: { type: string, format: email }
+                password: { type: string, minLength: 6 }
+                nombre: { type: string, minLength: 1 }
+                activo: { type: boolean }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: "#/components/schemas/Usuario"
+        "400":
+          description: Body inválido / error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "404":
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+    delete:
+      tags: [Dashboard]
+      summary: Elimina el usuario físicamente
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Eliminado (sin body)
+        "404":
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+        "400":
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  error: { type: string }
+        "401":
+          description: Sin token / token inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }

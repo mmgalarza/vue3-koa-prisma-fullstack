@@ -1,0 +1,15 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { TalonariosWhereInputObjectSchema as TalonariosWhereInputObjectSchema } from './objects/TalonariosWhereInput.schema';
+import { TalonariosOrderByWithAggregationInputObjectSchema as TalonariosOrderByWithAggregationInputObjectSchema } from './objects/TalonariosOrderByWithAggregationInput.schema';
+import { TalonariosScalarWhereWithAggregatesInputObjectSchema as TalonariosScalarWhereWithAggregatesInputObjectSchema } from './objects/TalonariosScalarWhereWithAggregatesInput.schema';
+import { TalonariosScalarFieldEnumSchema } from './enums/TalonariosScalarFieldEnum.schema';
+import { TalonariosCountAggregateInputObjectSchema as TalonariosCountAggregateInputObjectSchema } from './objects/TalonariosCountAggregateInput.schema';
+import { TalonariosMinAggregateInputObjectSchema as TalonariosMinAggregateInputObjectSchema } from './objects/TalonariosMinAggregateInput.schema';
+import { TalonariosMaxAggregateInputObjectSchema as TalonariosMaxAggregateInputObjectSchema } from './objects/TalonariosMaxAggregateInput.schema';
+import { TalonariosAvgAggregateInputObjectSchema as TalonariosAvgAggregateInputObjectSchema } from './objects/TalonariosAvgAggregateInput.schema';
+import { TalonariosSumAggregateInputObjectSchema as TalonariosSumAggregateInputObjectSchema } from './objects/TalonariosSumAggregateInput.schema';
+
+export const TalonariosGroupBySchema: z.ZodType<Prisma.TalonariosGroupByArgs> = z.object({ where: TalonariosWhereInputObjectSchema.optional(), orderBy: z.union([TalonariosOrderByWithAggregationInputObjectSchema, TalonariosOrderByWithAggregationInputObjectSchema.array()]).optional(), having: TalonariosScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(TalonariosScalarFieldEnumSchema), _count: z.union([ z.literal(true), TalonariosCountAggregateInputObjectSchema ]).optional(), _min: TalonariosMinAggregateInputObjectSchema.optional(), _max: TalonariosMaxAggregateInputObjectSchema.optional(), _avg: TalonariosAvgAggregateInputObjectSchema.optional(), _sum: TalonariosSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.TalonariosGroupByArgs>;
+
+export const TalonariosGroupByZodSchema = z.object({ where: TalonariosWhereInputObjectSchema.optional(), orderBy: z.union([TalonariosOrderByWithAggregationInputObjectSchema, TalonariosOrderByWithAggregationInputObjectSchema.array()]).optional(), having: TalonariosScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(TalonariosScalarFieldEnumSchema), _count: z.union([ z.literal(true), TalonariosCountAggregateInputObjectSchema ]).optional(), _min: TalonariosMinAggregateInputObjectSchema.optional(), _max: TalonariosMaxAggregateInputObjectSchema.optional(), _avg: TalonariosAvgAggregateInputObjectSchema.optional(), _sum: TalonariosSumAggregateInputObjectSchema.optional() }).strict();

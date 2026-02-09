@@ -1,0 +1,404 @@
+openapi: 3.0.3
+info:
+  title: Operaciones API
+  version: "1.0.0"
+  description: API para la gestión de operaciones comerciales con soporte para paginación.
+
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    # ===== ESQUEMAS DE PAGINACIÓN =====
+    PageMeta:
+      type: object
+      required:
+        - page
+        - limit
+        - total
+      properties:
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 10
+        total:
+          type: integer
+          example: 100
+
+    PagedOperacionesResponse:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Operacion"
+        meta:
+          $ref: "#/components/schemas/PageMeta"
+
+    # ===== ESQUEMAS DE NEGOCIO =====
+    OperacionDetalle:
+      type: object
+      required:
+        - idDetalle
+        - idProducto
+        - cantidad
+        - precioUnitario
+        - subtotal
+      properties:
+        idDetalle:
+          type: integer
+        idProducto:
+          type: integer
+        cantidad:
+          type: number
+        precioUnitario:
+          type: number
+        subtotal:
+          type: number
+
+    Cliente:
+      type: object
+      required:
+        - idCliente
+        - nombre
+        - email
+      properties:
+        idCliente:
+          type: integer
+        nombre:
+          type: string
+        email:
+          type: string
+        calle:
+          type: string
+          nullable: true
+        numero:
+          type: string
+          nullable: true
+        ciudad:
+          type: string
+          nullable: true
+        provincia:
+          type: string
+          nullable: true
+        codigoPostal:
+          type: string
+          nullable: true
+        pais:
+          type: string
+          nullable: true
+        contacto:
+          type: string
+          nullable: true
+
+    Operacion:
+      type: object
+      required:
+        - idOperacion
+        - estado
+        - total
+      properties:
+        idOperacion:
+          type: integer
+        estado:
+          type: string
+          enum: [BORRADOR, CONFIRMADA, ANULADA]
+        total:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        confirmedAt:
+          type: string
+          format: date-time
+          nullable: true
+        cliente:
+          $ref: "#/components/schemas/Cliente"
+        operacionesDetalle:
+          type: array
+          items:
+            $ref: "#/components/schemas/OperacionDetalle"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+
+paths:
+  /api/operaciones:
+    get:
+      tags: [ADMIN]
+      summary: Listar todas las operaciones (Paginado)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PagedOperacionesResponse"
+
+    post:
+      tags: [Operaciones]
+      summary: Crear operación BORRADOR
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - usuarioId
+              properties:
+                usuarioId:
+                  type: integer
+      responses:
+        "201":
+          description: Creado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operacion"
+        "400":
+          description: Validación
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/operaciones/cliente/{idCliente}:
+    parameters:
+      - in: path
+        name: idCliente
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 10
+    get:
+      tags: [Operaciones]
+      summary: Obtener operaciones por Cliente id (Paginado)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK - Lista paginada de operaciones del cliente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PagedOperacionesResponse"
+        "400":
+          description: Id inválido o error de parámetros
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/operaciones/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+
+    get:
+      tags: [Operaciones]
+      summary: Obtener operación por id
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operacion"
+        "404":
+          description: No encontrado
+        "400":
+          description: Id inválido
+
+    delete:
+      tags: [Operaciones]
+      summary: Eliminar operación (admin)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Operación eliminada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deleted:
+                    type: boolean
+
+  /api/operaciones/{id}/confirmar:
+    post:
+      tags: [Operaciones]
+      summary: Confirmar operación
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - usuarioId
+                - cliente
+              properties:
+                usuarioId:
+                  type: integer
+                cliente:
+                  $ref: "#/components/schemas/Cliente"
+      responses:
+        "200":
+          description: Confirmada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operacion"
+
+  /api/operaciones/{id}/detalles:
+    post:
+      tags: [Operaciones]
+      summary: Agregar detalle a operación
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - idProducto
+                - cantidad
+                - precioUnitario
+              properties:
+                idProducto:
+                  type: integer
+                cantidad:
+                  type: number
+                precioUnitario:
+                  type: number
+      responses:
+        "200":
+          description: Detalle agregado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperacionDetalle"
+
+  /api/operaciones/{id}/detalles/{idDetalle}:
+    patch:
+      tags: [Operaciones]
+      summary: Actualizar detalle de operación
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - cantidad
+                - precioUnitario
+              properties:
+                cantidad:
+                  type: number
+                precioUnitario:
+                  type: number
+      responses:
+        "200":
+          description: Detalle actualizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperacionDetalle"
+
+    delete:
+      tags: [Operaciones]
+      summary: Eliminar detalle de operación
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Detalle eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deleted:
+                    type: boolean
+
+  /api/operaciones/{id}/stock:
+    patch:
+      tags: [Operaciones]
+      summary: Ajustar stock (entrada o salida)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                incrementar:
+                  type: boolean
+      responses:
+        "200":
+          description: Stock ajustado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean

@@ -1,0 +1,15 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { AlmacenesWhereInputObjectSchema as AlmacenesWhereInputObjectSchema } from './objects/AlmacenesWhereInput.schema';
+import { AlmacenesOrderByWithAggregationInputObjectSchema as AlmacenesOrderByWithAggregationInputObjectSchema } from './objects/AlmacenesOrderByWithAggregationInput.schema';
+import { AlmacenesScalarWhereWithAggregatesInputObjectSchema as AlmacenesScalarWhereWithAggregatesInputObjectSchema } from './objects/AlmacenesScalarWhereWithAggregatesInput.schema';
+import { AlmacenesScalarFieldEnumSchema } from './enums/AlmacenesScalarFieldEnum.schema';
+import { AlmacenesCountAggregateInputObjectSchema as AlmacenesCountAggregateInputObjectSchema } from './objects/AlmacenesCountAggregateInput.schema';
+import { AlmacenesMinAggregateInputObjectSchema as AlmacenesMinAggregateInputObjectSchema } from './objects/AlmacenesMinAggregateInput.schema';
+import { AlmacenesMaxAggregateInputObjectSchema as AlmacenesMaxAggregateInputObjectSchema } from './objects/AlmacenesMaxAggregateInput.schema';
+import { AlmacenesAvgAggregateInputObjectSchema as AlmacenesAvgAggregateInputObjectSchema } from './objects/AlmacenesAvgAggregateInput.schema';
+import { AlmacenesSumAggregateInputObjectSchema as AlmacenesSumAggregateInputObjectSchema } from './objects/AlmacenesSumAggregateInput.schema';
+
+export const AlmacenesGroupBySchema: z.ZodType<Prisma.AlmacenesGroupByArgs> = z.object({ where: AlmacenesWhereInputObjectSchema.optional(), orderBy: z.union([AlmacenesOrderByWithAggregationInputObjectSchema, AlmacenesOrderByWithAggregationInputObjectSchema.array()]).optional(), having: AlmacenesScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(AlmacenesScalarFieldEnumSchema), _count: z.union([ z.literal(true), AlmacenesCountAggregateInputObjectSchema ]).optional(), _min: AlmacenesMinAggregateInputObjectSchema.optional(), _max: AlmacenesMaxAggregateInputObjectSchema.optional(), _avg: AlmacenesAvgAggregateInputObjectSchema.optional(), _sum: AlmacenesSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.AlmacenesGroupByArgs>;
+
+export const AlmacenesGroupByZodSchema = z.object({ where: AlmacenesWhereInputObjectSchema.optional(), orderBy: z.union([AlmacenesOrderByWithAggregationInputObjectSchema, AlmacenesOrderByWithAggregationInputObjectSchema.array()]).optional(), having: AlmacenesScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(AlmacenesScalarFieldEnumSchema), _count: z.union([ z.literal(true), AlmacenesCountAggregateInputObjectSchema ]).optional(), _min: AlmacenesMinAggregateInputObjectSchema.optional(), _max: AlmacenesMaxAggregateInputObjectSchema.optional(), _avg: AlmacenesAvgAggregateInputObjectSchema.optional(), _sum: AlmacenesSumAggregateInputObjectSchema.optional() }).strict();

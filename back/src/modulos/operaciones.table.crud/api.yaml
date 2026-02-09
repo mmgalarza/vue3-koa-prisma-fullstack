@@ -1,0 +1,321 @@
+openapi: 3.0.3
+info:
+  title: Operaciones API
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:{PORT}
+    variables:
+      PORT:
+        default: "3000"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Operacion:
+      type: object
+      required:
+        - idOperacion
+        - estado
+        - total
+      properties:
+        idOperacion:
+          type: integer
+        idCliente:
+          type: integer
+          nullable: true
+        estado:
+          type: string
+          enum: [BORRADOR, CONFIRMADA, ANULADA]
+        total:
+          type: number
+          format: decimal
+        createdAt:
+          type: string
+          format: date-time
+        confirmedAt:
+          type: string
+          format: date-time
+          nullable: true
+        operacionesDetalle:
+          type: array
+          items:
+            $ref: "#/components/schemas/OperacionDetalle"
+
+    OperacionDetalle:
+      type: object
+      required:
+        - idDetalle
+        - idProducto
+        - cantidad
+        - precioUnitario
+        - subtotal
+      properties:
+        idDetalle:
+          type: integer
+        idOperacion:
+          type: integer
+        idProducto:
+          type: integer
+        cantidad:
+          type: number
+        precioUnitario:
+          type: number
+          format: decimal
+        subtotal:
+          type: number
+          format: decimal
+        producto:
+          type: object
+          additionalProperties: true
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+
+paths:
+  /api/operaciones:
+    get:
+      tags: [Operaciones]
+      summary: Lista todas las operaciones (público)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Operacion"
+
+    post:
+      tags: [Operaciones]
+      summary: Crea una operación (BORRADOR, ADMIN)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idCliente:
+                  type: integer
+      responses:
+        "201":
+          description: Creada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operacion"
+        "400":
+          description: Validación
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: No autenticado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/operaciones/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+
+    get:
+      tags: [Operaciones]
+      summary: Obtiene una operación por id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operacion"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    delete:
+      tags: [Operaciones]
+      summary: Anula operación (ADMIN)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Operación anulada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operacion"
+
+  /api/operaciones/{id}/detalles:
+    post:
+      tags: [Operaciones]
+      summary: Agregar detalle a operación (ADMIN)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - idProducto
+                - cantidad
+              properties:
+                idProducto:
+                  type: integer
+                cantidad:
+                  type: number
+      responses:
+        "201":
+          description: Detalle agregado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperacionDetalle"
+        "400":
+          description: Validación / stock insuficiente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/operaciones/{id}/detalles/{idDetalle}:
+    patch:
+      tags: [Operaciones]
+      summary: Actualiza un detalle de operación (ADMIN)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: idDetalle
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cantidad:
+                  type: number
+      responses:
+        "200":
+          description: Detalle actualizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperacionDetalle"
+        "400":
+          description: Validación / stock insuficiente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    delete:
+      tags: [Operaciones]
+      summary: Elimina un detalle de operación (ADMIN)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: idDetalle
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Detalle eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deleted:
+                    type: boolean
+
+  /api/operaciones/{id}/confirmar:
+    patch:
+      tags: [Operaciones]
+      summary: Confirma operación (ADMIN)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - confirmar
+              properties:
+                confirmar:
+                  type: boolean
+                  enum: [true]
+      responses:
+        "200":
+          description: Operación confirmada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operacion"
+        "400":
+          description: Validación
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"

@@ -1,0 +1,71 @@
+/* ===== BASE CARD ===== */
+.card {
+  background: #fff;
+  border-radius: 0 12px 0 12px;
+  border: 1px solid #000000;
+  font-family: system-ui, sans-serif;
+  color: #333;
+  border-left: 8px double #000000fc;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+  border-left: 8px solid;
+}
+
+/* ===== CARD HEADER ===== */
+.card-header {
+  font-weight: 600;
+  font-size: 1.25rem;
+  padding: 16px 20px;
+  border-bottom: 1px solid;
+}
+
+/* ===== CARD BODY ===== */
+.card-body {
+  padding: 16px 20px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ===== CARD FOOTER (opcional) ===== */
+.card-footer {
+  padding: 12px 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* ALERT: rojo intenso */
+.card-alert {
+  border-color: #ff3b30;
+  background: #fff5f4;
+  color: #9c1c17;
+}
+
+/* CONFIG: azul / ajustes */
+.card-config {
+  border-color:#6366f1;
+  background: #f5f6ff;
+  color: #1f1f3d;
+}
+
+/* INFO: verde suave */
+.card-info {
+  background: #d7f8d9;
+  color: #144c03;
+}
+
+/* WARNING: amarillo / advertencia */
+.card-warning {
+  border-color: #ffba00;
+  background: #fff8e1;
+  color: #8a5a00;
+}

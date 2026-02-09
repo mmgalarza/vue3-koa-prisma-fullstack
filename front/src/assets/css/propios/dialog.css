@@ -1,0 +1,84 @@
+@import url("button.css");
+
+/* BASE para todos los <dlg> */
+.dlg {
+  border: 0;
+  border-radius: 12px;
+  padding: 18px 22px;
+  font-family: system-ui, sans-serif;
+  max-width: 90vw;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+  border-left: 6px solid #bdbdbd;
+  background: #fafafa;
+  color: #333;    
+}
+
+.dlg::backdrop {
+  background: rgba(0,0,0,0.45);
+}
+
+/* ===== TIPOS DE DIÁLOGO ===== */
+
+/* 1. ALERT: fuerte, urgente */
+.dlg-alert {
+  border-left: 6px solid #ff3b30;
+  background: #fff5f4;
+  color: #9c1c17;
+}
+
+/* 2. CONFIG: ajustes / ventanas de opciones */
+.dlg-config {
+  border-left: 6px solid #6366f1;
+  background: #f5f6ff;
+  color: #1f1f3d;
+}
+
+/* 3. INFO: información suave y neutral */
+.dlg-info {
+  border-left: 6px solid #00a416;
+  background: #d7f8d9;
+  color: #144c03;
+}
+
+/* 4. WARNING: advertencias importantes */
+.dlg-warning {
+  border-left: 6px solid #ffba00;
+  background: #fff8e1;
+  color: #8a5a00;
+}
+
+/*  Extras opcionales */
+.dlg-title {
+  margin-top: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.dlg-body {
+  margin: 12px 0;
+  line-height: 1.5;
+}
+
+.dlg-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dlg-actions button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.dlg-actions .btn-primary {
+  background: #0b5fff;
+  color: white;
+}
+
+.dlg-actions .btn-secondary {
+  background: #e5e5e5;
+}

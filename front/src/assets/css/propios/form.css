@@ -1,0 +1,153 @@
+@import url("inputavatar.css");
+@import url("inputImage.css");
+@import url("inputfotoperfil.css");
+@import url("inputDocs.css");
+@import url("button.css");
+@import url("display.css");
+@import url("panel.css");
+
+:root {
+  /* ESPACIADOS */
+  --form-padding: 10px;
+  --form-gap: 25px;
+  --form-campo-gap: 6px;
+  --form-fila-gap: 20px;
+  --form-botones-gap: 15px;
+
+  /* TAMAÃ‘OS / TIPOGRAFÃA */
+  --form-titulo-font-size: 2.2rem;
+  --form-input-padding: 10px;
+  --form-input-font-size: 15px;
+  --form-textarea-min-height: 90px;
+  --form-button-padding: 12px;
+  --form-max-width: 700px;
+
+  /* COLORES BASE */
+  --form-color-bg: #ffffff;
+  --form-color-border: #cccccc;
+  --form-color-border-light: #e4e4e4a8;
+
+  /* COLORES DE VALIDACIÃ“N */
+  --form-color-invalid-border: #e63946;
+  --form-color-invalid-bg: #ffe6e6;
+  --form-color-valid-border: #2a9d8f;
+  --form-color-valid-bg: #e6fff8;
+
+  /* SOMBRA */
+  --form-box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+  /* RADIOS */
+  --form-border-radius: 8px;
+  --form-input-radius: 6px;
+
+  /* OTRAS */
+  --form-required-asterisk-color: red;
+}
+section.form {
+  padding: var(--form-padding);
+  margin: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.form h2 {
+  text-align: center;
+  font-size: var(--form-titulo-font-size);
+  margin-bottom: 20px;
+  font-variant: small-caps;
+}
+
+.form form {
+  background: var(--form-color-bg);
+  padding: 30px;
+  border-radius: var(--form-border-radius);
+  max-width: var(--form-max-width);
+  box-shadow: var(--form-box-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-gap);
+  width: fit-content;
+  border: solid 1px var(--form-color-border-light);
+}
+
+/* FILAS */
+.form .fila {
+  display: flex;
+  gap: var(--form-fila-gap);
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+}
+
+.form .fila .campo {
+  flex: 1;
+}
+
+.form .campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-campo-gap);
+}
+
+/* ===== Asterisco automÃ¡tico usando :has() ===== */
+.form .campo:has(input[required]) > label::after,
+.form .campo:has(select[required]) > label::after,
+.form .campo:has(textarea[required]) > label::after,
+.form .campo:has(input[type="radio"]) > legend::after,
+.form .campo:has(input[required]) > .fila > label::after {
+  content: " ❋";
+  color: var(--form-required-asterisk-color);
+  font-weight: bold;
+}
+
+.form input:invalid, .form select:invalid, .form textarea:invalid,
+.form .campo .opciones:has(input:invalid) {
+  border-color: var(--form-color-invalid-border);
+  background-color: var(--form-color-invalid-bg);
+}
+
+.form input:valid, .form select:valid, .form textarea:valid,
+.form .campo .opciones:has(input:not(valid))  {
+  border-color: var(--form-color-valid-border);
+  background-color: var(--form-color-valid-bg);
+}
+
+.form input, .form select, .form textarea,
+.form .campo .opciones {
+  padding: var(--form-input-padding);
+  font-size: var(--form-input-font-size);
+  border: 1px solid var(--form-color-border);
+  border-radius: var(--form-input-radius);
+}
+
+.form textarea {
+  resize: vertical;
+  min-height: var(--form-textarea-min-height);
+}
+
+/* BOTONES */
+.form .botones {
+  display: flex;
+  gap: var(--form-botones-gap);
+}
+
+.form button {
+  flex: 1;
+  padding: var(--form-button-padding);
+  font-size: 16px;
+  border: none;
+  border-radius: var(--form-input-radius);
+  cursor: pointer;
+  /*color: white;*/
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .form .fila {
+    flex-direction: column;
+  }
+}
+

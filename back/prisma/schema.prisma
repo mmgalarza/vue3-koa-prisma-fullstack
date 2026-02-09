@@ -1,0 +1,161 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/prisma"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "./docs/erd.pdf"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Rol {
+  SUPER
+  ADMIN
+  USER
+}
+
+enum EstadoOp {
+  BORRADOR
+  CONFIRMADA
+  ANULADA
+}
+
+enum TCategoria {
+  FAMILIA
+  MADRE
+  HIJA
+}
+
+
+// Usuarios y empresas
+model Usuarios {
+  idUsuario     Int      @id @default(autoincrement())
+  username      String   @unique
+  email         String   @unique
+  password      String
+  nombre        String
+  activo        Boolean  @default(false)
+  creadoEn      DateTime @default(now())
+  actualizadoEn DateTime @updatedAt
+  rol           Rol      @default(USER)
+
+  cliente      Clientes?
+}
+
+model Empresas {
+  idEmpresa  Int    @id @default(1)  // fijamos la PK en 1
+  nombre     String
+  email      String?
+
+  calle      String   @default("")
+  numero     String?
+  ciudad     String   @default("")
+  provincia  String   @default("")
+  codigoPostal String @default("")
+  pais       String   @default("")
+  contacto   String?
+  activo     Boolean  @default(true)
+}
+
+// Clientes
+model Clientes {
+  idCliente  Int       @id @default(autoincrement())
+  idUsuario     Int      @unique   // FK a Usuario
+  usuario       Usuarios  @relation(fields: [idUsuario], references: [idUsuario])
+
+  nombre     String
+  email      String?
+  calle      String   @default("")
+  numero     String?
+  ciudad     String   @default("")
+  provincia  String   @default("")
+  codigoPostal String @default("")
+  pais       String   @default("")
+  contacto   String?
+  activo     Boolean  @default(true)
+
+  historial Operaciones[]
+}
+
+// Categorías
+model Categorias {
+  idCategoria      Int         @id @default(autoincrement())
+  nombre           String
+  descripcion      String?
+  icono            String?
+  tipo             TCategoria
+  activo           Boolean  @default(true)
+  idCategoriaPadre Int?
+  categoriaPadre   Categorias? @relation("Jerarquia", fields: [idCategoriaPadre], references: [idCategoria])
+  subcategorias    Categorias[] @relation("Jerarquia")
+
+  productos        Productos[]
+
+  @@index([tipo])
+  @@index([idCategoriaPadre])
+}
+
+// Productos
+
+model Productos {
+  idProducto   Int         @id @default(autoincrement())
+  nombre       String
+  descripcion  String?
+  activo       Boolean     @default(true)
+
+  precios             Decimal @default(0.0)
+  stock               Int @default(0)
+
+  idCategoria  Int
+  categoria    Categorias  @relation(fields: [idCategoria], references: [idCategoria])
+
+  // Relaciones existentes
+  imagenes            ProductoImagenes[]
+  operacionesDetalle  OperacionDetalle[]
+
+  
+}
+
+// Imágenes de productos
+model ProductoImagenes {
+  idImagen    Int       @id @default(autoincrement())
+  idProducto  Int
+  producto    Productos @relation(fields: [idProducto], references: [idProducto])
+  url         String
+  alt         String?
+  orden       Int       @default(1)
+  principal   Boolean   @default(false)
+  activo      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+}
+
+
+// Operaciones y detalle
+model Operaciones {
+  idOperacion  Int           @id @default(autoincrement())
+  estado       EstadoOp
+  total        Decimal
+  idCliente    Int
+  cliente      Clientes     @relation(fields: [idCliente], references: [idCliente])
+  createdAt    DateTime      @default(now())
+  confirmedAt  DateTime?
+  operacionesDetalle OperacionDetalle[]
+}
+// Detalles de operaciones
+model OperacionDetalle {
+  idDetalle      Int        @id @default(autoincrement())
+  idOperacion    Int
+  idProducto     Int
+  cantidad       Decimal
+  precioUnitario Decimal
+  subtotal       Decimal
+  operacion      Operaciones @relation(fields: [idOperacion], references: [idOperacion])
+  producto       Productos   @relation(fields: [idProducto], references: [idProducto])
+}
+
+
+

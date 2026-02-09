@@ -1,0 +1,15 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { CategoriasWhereInputObjectSchema as CategoriasWhereInputObjectSchema } from './objects/CategoriasWhereInput.schema';
+import { CategoriasOrderByWithAggregationInputObjectSchema as CategoriasOrderByWithAggregationInputObjectSchema } from './objects/CategoriasOrderByWithAggregationInput.schema';
+import { CategoriasScalarWhereWithAggregatesInputObjectSchema as CategoriasScalarWhereWithAggregatesInputObjectSchema } from './objects/CategoriasScalarWhereWithAggregatesInput.schema';
+import { CategoriasScalarFieldEnumSchema } from './enums/CategoriasScalarFieldEnum.schema';
+import { CategoriasCountAggregateInputObjectSchema as CategoriasCountAggregateInputObjectSchema } from './objects/CategoriasCountAggregateInput.schema';
+import { CategoriasMinAggregateInputObjectSchema as CategoriasMinAggregateInputObjectSchema } from './objects/CategoriasMinAggregateInput.schema';
+import { CategoriasMaxAggregateInputObjectSchema as CategoriasMaxAggregateInputObjectSchema } from './objects/CategoriasMaxAggregateInput.schema';
+import { CategoriasAvgAggregateInputObjectSchema as CategoriasAvgAggregateInputObjectSchema } from './objects/CategoriasAvgAggregateInput.schema';
+import { CategoriasSumAggregateInputObjectSchema as CategoriasSumAggregateInputObjectSchema } from './objects/CategoriasSumAggregateInput.schema';
+
+export const CategoriasGroupBySchema: z.ZodType<Prisma.CategoriasGroupByArgs> = z.object({ where: CategoriasWhereInputObjectSchema.optional(), orderBy: z.union([CategoriasOrderByWithAggregationInputObjectSchema, CategoriasOrderByWithAggregationInputObjectSchema.array()]).optional(), having: CategoriasScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(CategoriasScalarFieldEnumSchema), _count: z.union([ z.literal(true), CategoriasCountAggregateInputObjectSchema ]).optional(), _min: CategoriasMinAggregateInputObjectSchema.optional(), _max: CategoriasMaxAggregateInputObjectSchema.optional(), _avg: CategoriasAvgAggregateInputObjectSchema.optional(), _sum: CategoriasSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.CategoriasGroupByArgs>;
+
+export const CategoriasGroupByZodSchema = z.object({ where: CategoriasWhereInputObjectSchema.optional(), orderBy: z.union([CategoriasOrderByWithAggregationInputObjectSchema, CategoriasOrderByWithAggregationInputObjectSchema.array()]).optional(), having: CategoriasScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(CategoriasScalarFieldEnumSchema), _count: z.union([ z.literal(true), CategoriasCountAggregateInputObjectSchema ]).optional(), _min: CategoriasMinAggregateInputObjectSchema.optional(), _max: CategoriasMaxAggregateInputObjectSchema.optional(), _avg: CategoriasAvgAggregateInputObjectSchema.optional(), _sum: CategoriasSumAggregateInputObjectSchema.optional() }).strict();

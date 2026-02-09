@@ -1,0 +1,88 @@
+-------
+FRONT, VITE, SPA, VUE3+, VUEFITY3.5+, ZOD, Backend Propio.
+
+Solo me das codigo cuando te lo indique con la frase #codigo!
+
+
+
+Desarrollamos el arreglo categorias de nuestro pequeño dominio ventas.
+
+Experiencia Admin.
+
+
+
+El admin accedera a categorias, para ajustar las familias, subfamilias y finalmente las hijas que son las finales. Solo las categorias finales son puntos de relacionables con los productos. Una relacion de uno a muchos, siendo IdCategoria la clave externa en su entidad.
+
+
+
+Todo muy previsible porque es un ejercicio que hago para aprender.
+
+
+
+Como vamos a proceder todo dentro de la misma carpeta.
+
+
+
+1- te dare el api.yaml -> ui swagger de la api
+
+2- crearemos los types o contracts de request y response (types.ts)
+
+3- crearemos sus esquemas (schema.zod.ts)
+
+4- creamos el punto de conexion (api.ts) (te dare molde a seguir)
+
+5- creamos servicio (service.ts)
+
+6- creamos store pinia (store.ts)
+
+7- finalmente creamos la vista (vista.vue)
+
+
+
+cuando te diga al final del prompt, #input! tu solo recibes, no respondes.
+
+
+
+#input!
+------
+
+FRONT, VITE, SPA, VUE3+, VUEFITY3.5+, ZOD, Backend Propio.
+
+Solo me das codigo cuando te lo indique con la frase #codigo!
+
+Mezcle por error el service.ts y store.ts juntos.
+tengo que separarlos.
+
+
+cuando te diga al final del prompt, #input! tu solo recibes, no respondes.
+
+
+
+#input!
+
+------------------------------
+[
+{"1": "La comunicacion esta regulada por una o mas reglas preestablecidas aqui."},
+{"2": "Nunca asumes, ni supones, ni anticipas nada en absoluto."},
+{"3": "La respuesta libre nunca se emite automaticamente."},
+{"4": "La respuesta al #input! siempre es el estado: {inputs: #cntInput, dudas: #cntDudas, salidas: #cntOutputs, propuesta: #cntPropuestas}"},
+{"4": "La ultima palabra siempre es un comando."},
+{"5": "La sintaxis es: #comando!, donde 'comando' es la orden."},
+{"6": "#input! (preestablecido por omision de comando en toda entrada de datos) indica que la IA solo debe entender."},
+{"7": "#codigo! Indica que la IA debe responder con el código o script solicitado."},
+{"8": "#duda! Indica que deseo conocer la duda que tienes."},
+{"9": "#responde! Indica respuesta corta"},
+{"10": "#dime! Indica respuesta libre"},
+{"11": "#que! Indica respuesta muy corta, no supera los 1024 caracteres."},
+{"12": "#rulers! Indica las reglas a seguir para el dialogo."},
+{"13": "#context! Indica el contexto del dialogo."},
+{"14": "#target! Indica el objetivo del dialogo."},
+{"15": "#propuesta! Indica que deseo conocer la propuesta."},
+]
+#rulers!
+
+
+FRONT, VITE, SPA, VUE3+, VUEFITY3.5+, PUG, ZOD, Backend Propio.
+#context!
+
+

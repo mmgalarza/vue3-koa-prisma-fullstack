@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { TalonariosOrderByWithRelationInputObjectSchema as TalonariosOrderByWithRelationInputObjectSchema } from './objects/TalonariosOrderByWithRelationInput.schema';
+import { TalonariosWhereInputObjectSchema as TalonariosWhereInputObjectSchema } from './objects/TalonariosWhereInput.schema';
+import { TalonariosWhereUniqueInputObjectSchema as TalonariosWhereUniqueInputObjectSchema } from './objects/TalonariosWhereUniqueInput.schema';
+import { TalonariosCountAggregateInputObjectSchema as TalonariosCountAggregateInputObjectSchema } from './objects/TalonariosCountAggregateInput.schema';
+import { TalonariosMinAggregateInputObjectSchema as TalonariosMinAggregateInputObjectSchema } from './objects/TalonariosMinAggregateInput.schema';
+import { TalonariosMaxAggregateInputObjectSchema as TalonariosMaxAggregateInputObjectSchema } from './objects/TalonariosMaxAggregateInput.schema';
+import { TalonariosAvgAggregateInputObjectSchema as TalonariosAvgAggregateInputObjectSchema } from './objects/TalonariosAvgAggregateInput.schema';
+import { TalonariosSumAggregateInputObjectSchema as TalonariosSumAggregateInputObjectSchema } from './objects/TalonariosSumAggregateInput.schema';
+
+export const TalonariosAggregateSchema: z.ZodType<Prisma.TalonariosAggregateArgs> = z.object({ orderBy: z.union([TalonariosOrderByWithRelationInputObjectSchema, TalonariosOrderByWithRelationInputObjectSchema.array()]).optional(), where: TalonariosWhereInputObjectSchema.optional(), cursor: TalonariosWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), TalonariosCountAggregateInputObjectSchema ]).optional(), _min: TalonariosMinAggregateInputObjectSchema.optional(), _max: TalonariosMaxAggregateInputObjectSchema.optional(), _avg: TalonariosAvgAggregateInputObjectSchema.optional(), _sum: TalonariosSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.TalonariosAggregateArgs>;
+
+export const TalonariosAggregateZodSchema = z.object({ orderBy: z.union([TalonariosOrderByWithRelationInputObjectSchema, TalonariosOrderByWithRelationInputObjectSchema.array()]).optional(), where: TalonariosWhereInputObjectSchema.optional(), cursor: TalonariosWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), TalonariosCountAggregateInputObjectSchema ]).optional(), _min: TalonariosMinAggregateInputObjectSchema.optional(), _max: TalonariosMaxAggregateInputObjectSchema.optional(), _avg: TalonariosAvgAggregateInputObjectSchema.optional(), _sum: TalonariosSumAggregateInputObjectSchema.optional() }).strict();

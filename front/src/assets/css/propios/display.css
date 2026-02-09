@@ -1,0 +1,103 @@
+/* ---------------------------
+   Display básicos
+   --------------------------- */
+.d-block     { display: block; }
+.d-inline    { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-none      { display: none; }
+
+/* ---------------------------
+   Flex (fila/columna)
+   --------------------------- */
+/* Activa flex. Opcionalmente combinar con flex-row/col */
+.d-flex      { display: flex; }
+.d-inline-flex { display: inline-flex; }
+
+/* Direcciones flex comunes */
+.flex-row       { flex-direction: row; }
+.flex-row-reverse { flex-direction: row-reverse; }
+.flex-col       { flex-direction: column; }
+.flex-col-reverse { flex-direction: column-reverse; }
+
+/* Alineamiento rápido (opcional) */
+.flex-center        { justify-content: center; align-items: center; }
+.flex-justify-between { justify-content: space-between; }
+.flex-justify-evenly { justify-content:space-evenly; }
+.flex-justify-around { justify-content:space-around; }
+.flex-wrap          { flex-wrap: wrap; }
+
+/* Escala de ejemplo: 0, 4px, 8px, 12px, 16px, 24px, 32px */
+.gap-0   { gap: 0; }
+.gap-1   { gap: 4px; }
+.gap-2   { gap: 8px; }
+.gap-3   { gap: 12px; }
+.gap-4   { gap: 16px; }
+.gap-5   { gap: 24px; }
+.gap-6   { gap: 32px; }
+
+/* row-gap */
+.row-gap-0 { row-gap: 0; }
+.row-gap-1 { row-gap: 4px; }
+.row-gap-2 { row-gap: 8px; }
+.row-gap-3 { row-gap: 12px; }
+.row-gap-4 { row-gap: 16px; }
+.row-gap-5 { row-gap: 24px; }
+.row-gap-6 { row-gap: 32px; }
+
+/* column-gap */
+.col-gap-0 { column-gap: 0; }
+.col-gap-1 { column-gap: 4px; }
+.col-gap-2 { column-gap: 8px; }
+.col-gap-3 { column-gap: 12px; }
+.col-gap-4 { column-gap: 16px; }
+.col-gap-5 { column-gap: 24px; }
+.col-gap-6 { column-gap: 32px; }
+
+
+.flex-1 { flex: 1; }
+.flex-2 { flex: 2; }
+.flex-3 { flex: 3; }
+/* ---------------------------
+   Posicionamiento
+   --------------------------- */
+/* Estas clases sólo cambian position. No fijan top/left/right/bottom
+   para no forzar el layout; asigna offsets según necesites. */
+.d-static    { position: static; }
+.d-relative  { position: relative; }
+.d-absolute  { position: absolute; }
+.d-fixed     { position: fixed; }
+.d-sticky    { position: sticky; }
+
+/* Nota: position: sticky requiere que definas un offset, por ejemplo:
+   .d-sticky { position: sticky; top: 0; }
+   aquí lo dejamos sin offset por defecto para mayor flexibilidad. */
+
+/* Atajos: combinar position + full stretching (útil para overlays) */
+.position-full {
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+}
+
+/* ---------------------------
+   Float
+   --------------------------- */
+.float-left         { float: left; }
+.float-right        { float: right; }
+.float-none         { float: none; }
+
+/* Limpiar floats (clearfix clásico) */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* narradores */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

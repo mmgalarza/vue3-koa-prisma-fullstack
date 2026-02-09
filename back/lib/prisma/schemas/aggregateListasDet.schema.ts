@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { ListasDetOrderByWithRelationInputObjectSchema as ListasDetOrderByWithRelationInputObjectSchema } from './objects/ListasDetOrderByWithRelationInput.schema';
+import { ListasDetWhereInputObjectSchema as ListasDetWhereInputObjectSchema } from './objects/ListasDetWhereInput.schema';
+import { ListasDetWhereUniqueInputObjectSchema as ListasDetWhereUniqueInputObjectSchema } from './objects/ListasDetWhereUniqueInput.schema';
+import { ListasDetCountAggregateInputObjectSchema as ListasDetCountAggregateInputObjectSchema } from './objects/ListasDetCountAggregateInput.schema';
+import { ListasDetMinAggregateInputObjectSchema as ListasDetMinAggregateInputObjectSchema } from './objects/ListasDetMinAggregateInput.schema';
+import { ListasDetMaxAggregateInputObjectSchema as ListasDetMaxAggregateInputObjectSchema } from './objects/ListasDetMaxAggregateInput.schema';
+import { ListasDetAvgAggregateInputObjectSchema as ListasDetAvgAggregateInputObjectSchema } from './objects/ListasDetAvgAggregateInput.schema';
+import { ListasDetSumAggregateInputObjectSchema as ListasDetSumAggregateInputObjectSchema } from './objects/ListasDetSumAggregateInput.schema';
+
+export const ListasDetAggregateSchema: z.ZodType<Prisma.ListasDetAggregateArgs> = z.object({ orderBy: z.union([ListasDetOrderByWithRelationInputObjectSchema, ListasDetOrderByWithRelationInputObjectSchema.array()]).optional(), where: ListasDetWhereInputObjectSchema.optional(), cursor: ListasDetWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), ListasDetCountAggregateInputObjectSchema ]).optional(), _min: ListasDetMinAggregateInputObjectSchema.optional(), _max: ListasDetMaxAggregateInputObjectSchema.optional(), _avg: ListasDetAvgAggregateInputObjectSchema.optional(), _sum: ListasDetSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.ListasDetAggregateArgs>;
+
+export const ListasDetAggregateZodSchema = z.object({ orderBy: z.union([ListasDetOrderByWithRelationInputObjectSchema, ListasDetOrderByWithRelationInputObjectSchema.array()]).optional(), where: ListasDetWhereInputObjectSchema.optional(), cursor: ListasDetWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), ListasDetCountAggregateInputObjectSchema ]).optional(), _min: ListasDetMinAggregateInputObjectSchema.optional(), _max: ListasDetMaxAggregateInputObjectSchema.optional(), _avg: ListasDetAvgAggregateInputObjectSchema.optional(), _sum: ListasDetSumAggregateInputObjectSchema.optional() }).strict();

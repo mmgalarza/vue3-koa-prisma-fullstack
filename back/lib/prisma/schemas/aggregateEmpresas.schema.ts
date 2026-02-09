@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { EmpresasOrderByWithRelationInputObjectSchema as EmpresasOrderByWithRelationInputObjectSchema } from './objects/EmpresasOrderByWithRelationInput.schema';
+import { EmpresasWhereInputObjectSchema as EmpresasWhereInputObjectSchema } from './objects/EmpresasWhereInput.schema';
+import { EmpresasWhereUniqueInputObjectSchema as EmpresasWhereUniqueInputObjectSchema } from './objects/EmpresasWhereUniqueInput.schema';
+import { EmpresasCountAggregateInputObjectSchema as EmpresasCountAggregateInputObjectSchema } from './objects/EmpresasCountAggregateInput.schema';
+import { EmpresasMinAggregateInputObjectSchema as EmpresasMinAggregateInputObjectSchema } from './objects/EmpresasMinAggregateInput.schema';
+import { EmpresasMaxAggregateInputObjectSchema as EmpresasMaxAggregateInputObjectSchema } from './objects/EmpresasMaxAggregateInput.schema';
+import { EmpresasAvgAggregateInputObjectSchema as EmpresasAvgAggregateInputObjectSchema } from './objects/EmpresasAvgAggregateInput.schema';
+import { EmpresasSumAggregateInputObjectSchema as EmpresasSumAggregateInputObjectSchema } from './objects/EmpresasSumAggregateInput.schema';
+
+export const EmpresasAggregateSchema: z.ZodType<Prisma.EmpresasAggregateArgs> = z.object({ orderBy: z.union([EmpresasOrderByWithRelationInputObjectSchema, EmpresasOrderByWithRelationInputObjectSchema.array()]).optional(), where: EmpresasWhereInputObjectSchema.optional(), cursor: EmpresasWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), EmpresasCountAggregateInputObjectSchema ]).optional(), _min: EmpresasMinAggregateInputObjectSchema.optional(), _max: EmpresasMaxAggregateInputObjectSchema.optional(), _avg: EmpresasAvgAggregateInputObjectSchema.optional(), _sum: EmpresasSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.EmpresasAggregateArgs>;
+
+export const EmpresasAggregateZodSchema = z.object({ orderBy: z.union([EmpresasOrderByWithRelationInputObjectSchema, EmpresasOrderByWithRelationInputObjectSchema.array()]).optional(), where: EmpresasWhereInputObjectSchema.optional(), cursor: EmpresasWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), EmpresasCountAggregateInputObjectSchema ]).optional(), _min: EmpresasMinAggregateInputObjectSchema.optional(), _max: EmpresasMaxAggregateInputObjectSchema.optional(), _avg: EmpresasAvgAggregateInputObjectSchema.optional(), _sum: EmpresasSumAggregateInputObjectSchema.optional() }).strict();

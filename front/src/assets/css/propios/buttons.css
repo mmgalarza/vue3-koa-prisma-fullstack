@@ -1,0 +1,89 @@
+/* ===== BASE BUTTON ===== */
+.btn {
+  padding: 8px 18px;
+  /* font-family: system-ui, sans-serif; */
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  font-variant: all-small-caps;
+}
+
+/* Hover general */
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  filter: drop-shadow(2px 4px 6px black);
+}
+
+/* Focus */
+.btn:focus {
+  box-shadow: 0 0 0 3px rgba(0, 120, 255, 0.3);
+}
+
+/* ===== PRIMARY ===== */
+.btn-primary {
+  background-color: #2c84e2;
+  color: #fff;
+  border-color: #f4f8ff;
+}
+
+/* SECONDARY: neutro / gris */
+.btn-secondary {
+  background-color: #e5e5e5;
+  color: #333;
+  border-color: #ccc;
+}
+
+/* INFO: verde suave */
+.btn-info {
+  background-color: #00a416;
+  color: #fff;
+  border-color: #00a416;
+}
+
+/* WARNING: amarillo / naranja */
+.btn-warning {
+  background-color: #ffba00;
+  color: #333;
+  border-color: #ffba00;
+}
+
+/* ALERT: rojo intenso */
+.btn-alert {
+  background-color: #ff3b30;
+  color: #fff;
+  border-color: #ff3b30;
+}
+
+/* CLEAR: botÃƒÂ³n transparente / outline */
+.btn-clear {
+  background: transparent;
+  color: #0b5fff;
+  border: 1px solid #0b5fff;
+}
+
+.btn-outline {
+  background: transparent;
+  border-width: 2px;
+  color: inherit;
+}
+
+/* Ejemplos */
+.btn-outline-primary {
+  border-color: #0b5fff;
+  color: #0b5fff;
+}
+
+.btn-outline-alert {
+  border-color: #ff3b30;
+  color: #ff3b30;
+}
+
+.btn-outline-warning {
+  border-color: #ffba00;
+  color: #ffba00;
+}

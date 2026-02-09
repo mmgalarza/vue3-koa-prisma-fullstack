@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { ProveedoresOrderByWithRelationInputObjectSchema as ProveedoresOrderByWithRelationInputObjectSchema } from './objects/ProveedoresOrderByWithRelationInput.schema';
+import { ProveedoresWhereInputObjectSchema as ProveedoresWhereInputObjectSchema } from './objects/ProveedoresWhereInput.schema';
+import { ProveedoresWhereUniqueInputObjectSchema as ProveedoresWhereUniqueInputObjectSchema } from './objects/ProveedoresWhereUniqueInput.schema';
+import { ProveedoresCountAggregateInputObjectSchema as ProveedoresCountAggregateInputObjectSchema } from './objects/ProveedoresCountAggregateInput.schema';
+import { ProveedoresMinAggregateInputObjectSchema as ProveedoresMinAggregateInputObjectSchema } from './objects/ProveedoresMinAggregateInput.schema';
+import { ProveedoresMaxAggregateInputObjectSchema as ProveedoresMaxAggregateInputObjectSchema } from './objects/ProveedoresMaxAggregateInput.schema';
+import { ProveedoresAvgAggregateInputObjectSchema as ProveedoresAvgAggregateInputObjectSchema } from './objects/ProveedoresAvgAggregateInput.schema';
+import { ProveedoresSumAggregateInputObjectSchema as ProveedoresSumAggregateInputObjectSchema } from './objects/ProveedoresSumAggregateInput.schema';
+
+export const ProveedoresAggregateSchema: z.ZodType<Prisma.ProveedoresAggregateArgs> = z.object({ orderBy: z.union([ProveedoresOrderByWithRelationInputObjectSchema, ProveedoresOrderByWithRelationInputObjectSchema.array()]).optional(), where: ProveedoresWhereInputObjectSchema.optional(), cursor: ProveedoresWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), ProveedoresCountAggregateInputObjectSchema ]).optional(), _min: ProveedoresMinAggregateInputObjectSchema.optional(), _max: ProveedoresMaxAggregateInputObjectSchema.optional(), _avg: ProveedoresAvgAggregateInputObjectSchema.optional(), _sum: ProveedoresSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.ProveedoresAggregateArgs>;
+
+export const ProveedoresAggregateZodSchema = z.object({ orderBy: z.union([ProveedoresOrderByWithRelationInputObjectSchema, ProveedoresOrderByWithRelationInputObjectSchema.array()]).optional(), where: ProveedoresWhereInputObjectSchema.optional(), cursor: ProveedoresWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), ProveedoresCountAggregateInputObjectSchema ]).optional(), _min: ProveedoresMinAggregateInputObjectSchema.optional(), _max: ProveedoresMaxAggregateInputObjectSchema.optional(), _avg: ProveedoresAvgAggregateInputObjectSchema.optional(), _sum: ProveedoresSumAggregateInputObjectSchema.optional() }).strict();

@@ -1,0 +1,15 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { FacturaWhereInputObjectSchema as FacturaWhereInputObjectSchema } from './objects/FacturaWhereInput.schema';
+import { FacturaOrderByWithAggregationInputObjectSchema as FacturaOrderByWithAggregationInputObjectSchema } from './objects/FacturaOrderByWithAggregationInput.schema';
+import { FacturaScalarWhereWithAggregatesInputObjectSchema as FacturaScalarWhereWithAggregatesInputObjectSchema } from './objects/FacturaScalarWhereWithAggregatesInput.schema';
+import { FacturaScalarFieldEnumSchema } from './enums/FacturaScalarFieldEnum.schema';
+import { FacturaCountAggregateInputObjectSchema as FacturaCountAggregateInputObjectSchema } from './objects/FacturaCountAggregateInput.schema';
+import { FacturaMinAggregateInputObjectSchema as FacturaMinAggregateInputObjectSchema } from './objects/FacturaMinAggregateInput.schema';
+import { FacturaMaxAggregateInputObjectSchema as FacturaMaxAggregateInputObjectSchema } from './objects/FacturaMaxAggregateInput.schema';
+import { FacturaAvgAggregateInputObjectSchema as FacturaAvgAggregateInputObjectSchema } from './objects/FacturaAvgAggregateInput.schema';
+import { FacturaSumAggregateInputObjectSchema as FacturaSumAggregateInputObjectSchema } from './objects/FacturaSumAggregateInput.schema';
+
+export const FacturaGroupBySchema: z.ZodType<Prisma.FacturaGroupByArgs> = z.object({ where: FacturaWhereInputObjectSchema.optional(), orderBy: z.union([FacturaOrderByWithAggregationInputObjectSchema, FacturaOrderByWithAggregationInputObjectSchema.array()]).optional(), having: FacturaScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(FacturaScalarFieldEnumSchema), _count: z.union([ z.literal(true), FacturaCountAggregateInputObjectSchema ]).optional(), _min: FacturaMinAggregateInputObjectSchema.optional(), _max: FacturaMaxAggregateInputObjectSchema.optional(), _avg: FacturaAvgAggregateInputObjectSchema.optional(), _sum: FacturaSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.FacturaGroupByArgs>;
+
+export const FacturaGroupByZodSchema = z.object({ where: FacturaWhereInputObjectSchema.optional(), orderBy: z.union([FacturaOrderByWithAggregationInputObjectSchema, FacturaOrderByWithAggregationInputObjectSchema.array()]).optional(), having: FacturaScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(FacturaScalarFieldEnumSchema), _count: z.union([ z.literal(true), FacturaCountAggregateInputObjectSchema ]).optional(), _min: FacturaMinAggregateInputObjectSchema.optional(), _max: FacturaMaxAggregateInputObjectSchema.optional(), _avg: FacturaAvgAggregateInputObjectSchema.optional(), _sum: FacturaSumAggregateInputObjectSchema.optional() }).strict();

@@ -1,0 +1,14 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { RegistroOrderByWithRelationInputObjectSchema as RegistroOrderByWithRelationInputObjectSchema } from './objects/RegistroOrderByWithRelationInput.schema';
+import { RegistroWhereInputObjectSchema as RegistroWhereInputObjectSchema } from './objects/RegistroWhereInput.schema';
+import { RegistroWhereUniqueInputObjectSchema as RegistroWhereUniqueInputObjectSchema } from './objects/RegistroWhereUniqueInput.schema';
+import { RegistroCountAggregateInputObjectSchema as RegistroCountAggregateInputObjectSchema } from './objects/RegistroCountAggregateInput.schema';
+import { RegistroMinAggregateInputObjectSchema as RegistroMinAggregateInputObjectSchema } from './objects/RegistroMinAggregateInput.schema';
+import { RegistroMaxAggregateInputObjectSchema as RegistroMaxAggregateInputObjectSchema } from './objects/RegistroMaxAggregateInput.schema';
+import { RegistroAvgAggregateInputObjectSchema as RegistroAvgAggregateInputObjectSchema } from './objects/RegistroAvgAggregateInput.schema';
+import { RegistroSumAggregateInputObjectSchema as RegistroSumAggregateInputObjectSchema } from './objects/RegistroSumAggregateInput.schema';
+
+export const RegistroAggregateSchema: z.ZodType<Prisma.RegistroAggregateArgs> = z.object({ orderBy: z.union([RegistroOrderByWithRelationInputObjectSchema, RegistroOrderByWithRelationInputObjectSchema.array()]).optional(), where: RegistroWhereInputObjectSchema.optional(), cursor: RegistroWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), RegistroCountAggregateInputObjectSchema ]).optional(), _min: RegistroMinAggregateInputObjectSchema.optional(), _max: RegistroMaxAggregateInputObjectSchema.optional(), _avg: RegistroAvgAggregateInputObjectSchema.optional(), _sum: RegistroSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.RegistroAggregateArgs>;
+
+export const RegistroAggregateZodSchema = z.object({ orderBy: z.union([RegistroOrderByWithRelationInputObjectSchema, RegistroOrderByWithRelationInputObjectSchema.array()]).optional(), where: RegistroWhereInputObjectSchema.optional(), cursor: RegistroWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), _count: z.union([ z.literal(true), RegistroCountAggregateInputObjectSchema ]).optional(), _min: RegistroMinAggregateInputObjectSchema.optional(), _max: RegistroMaxAggregateInputObjectSchema.optional(), _avg: RegistroAvgAggregateInputObjectSchema.optional(), _sum: RegistroSumAggregateInputObjectSchema.optional() }).strict();

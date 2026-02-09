@@ -1,0 +1,37 @@
+@import url("form.css");
+@import url("fx.css");
+@import url("display.css");
+@import url("dialog.css");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* bordeamos con el color correspondiente */
+.form input[type=file]:invalid + div#fotoPerfilPreview {
+    background-color: var(--form-color-invalid-bg);
+    border: 1px solid var(
+    --form-color-invalid-border);
+    outline: none;
+}
+
+.form input[type=file]:valid + div#fotoPerfilPreview {
+    border: 1px solid var(
+    --form-color-valid-border);
+    outline: none;
+}
+
+/* quitamos el * de icono de la camara */
+
+.form .campo:has(input[type=file]) > label::after {
+    content: "";
+}
+
+.campo.foto-perfil {margin: auto;}
+
+/* solo muestra enviar si el formulario es valido */
+.form form:invalid .botones #btnOk {
+    display:none;
+}
+

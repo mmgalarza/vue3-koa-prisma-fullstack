@@ -1,0 +1,100 @@
+/* ---------- PANEL ---------- */
+.panel {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    background: #fafafa;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 2px gray;
+}
+
+/* Ocultar la flecha nativa */
+.panel > summary::-webkit-details-marker {
+    display: none;
+}
+.panel > summary::marker {
+    content: "";
+}
+
+/* HEADER */
+.panel > summary {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    background: #e7e7e7;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-variant: small-caps;
+    color: #333;
+    list-style: none;
+    position: relative;
+}
+
+/* FLECHA GENERADA POR CSS */
+.panel > summary::after {
+    content: "";
+    width: 18px;
+    height: 18px;
+
+    background-image: url("data:image/svg+xml;utf8,\<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\<path d='M8 10l4 4 4-4' stroke='%23333' stroke-width='2' fill='none'/>\</svg>");
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    margin-left: auto;
+    transition: transform .2s ease;
+}
+
+.panel:not([open]) summary::after {
+    transform: rotate(-90deg);
+}
+
+/* CONTENIDO */
+.panel > div  {
+    padding: 10px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* ---------- VARIANTES DE PANEL ---------- */
+
+/* INFO */
+.panel-info {
+    border-left: 6px solid #00a416;
+    background: #d7f8d9;
+}
+.panel-info > summary {
+    background: #c5efc5;
+    color: #144c03;
+}
+
+/* ALERT */
+.panel-alert {
+    border-left: 6px solid #ff3b30;
+    background: #fff5f4;
+}
+.panel-alert > summary {
+    background: #ffd9d7;
+    color: #9c1c17;
+}
+
+/* WARNING */
+.panel-warning {
+    border-left: 6px solid #ffba00;
+    background: #fff8e1;
+}
+.panel-warning > summary {
+    background: #fff3c2;
+    color: #8a5a00;
+}
+
+/* NORMAL */
+.panel-normal {
+    border-left: 6px solid #636363;
+    background: #f5f5f5;
+}
+.panel-normal > summary {
+    background: #e7e7e7;
+    color: #333;
+}

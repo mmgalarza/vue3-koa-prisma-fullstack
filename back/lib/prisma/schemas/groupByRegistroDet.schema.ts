@@ -1,0 +1,15 @@
+import type { Prisma } from '../client';
+import * as z from 'zod';
+import { RegistroDetWhereInputObjectSchema as RegistroDetWhereInputObjectSchema } from './objects/RegistroDetWhereInput.schema';
+import { RegistroDetOrderByWithAggregationInputObjectSchema as RegistroDetOrderByWithAggregationInputObjectSchema } from './objects/RegistroDetOrderByWithAggregationInput.schema';
+import { RegistroDetScalarWhereWithAggregatesInputObjectSchema as RegistroDetScalarWhereWithAggregatesInputObjectSchema } from './objects/RegistroDetScalarWhereWithAggregatesInput.schema';
+import { RegistroDetScalarFieldEnumSchema } from './enums/RegistroDetScalarFieldEnum.schema';
+import { RegistroDetCountAggregateInputObjectSchema as RegistroDetCountAggregateInputObjectSchema } from './objects/RegistroDetCountAggregateInput.schema';
+import { RegistroDetMinAggregateInputObjectSchema as RegistroDetMinAggregateInputObjectSchema } from './objects/RegistroDetMinAggregateInput.schema';
+import { RegistroDetMaxAggregateInputObjectSchema as RegistroDetMaxAggregateInputObjectSchema } from './objects/RegistroDetMaxAggregateInput.schema';
+import { RegistroDetAvgAggregateInputObjectSchema as RegistroDetAvgAggregateInputObjectSchema } from './objects/RegistroDetAvgAggregateInput.schema';
+import { RegistroDetSumAggregateInputObjectSchema as RegistroDetSumAggregateInputObjectSchema } from './objects/RegistroDetSumAggregateInput.schema';
+
+export const RegistroDetGroupBySchema: z.ZodType<Prisma.RegistroDetGroupByArgs> = z.object({ where: RegistroDetWhereInputObjectSchema.optional(), orderBy: z.union([RegistroDetOrderByWithAggregationInputObjectSchema, RegistroDetOrderByWithAggregationInputObjectSchema.array()]).optional(), having: RegistroDetScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(RegistroDetScalarFieldEnumSchema), _count: z.union([ z.literal(true), RegistroDetCountAggregateInputObjectSchema ]).optional(), _min: RegistroDetMinAggregateInputObjectSchema.optional(), _max: RegistroDetMaxAggregateInputObjectSchema.optional(), _avg: RegistroDetAvgAggregateInputObjectSchema.optional(), _sum: RegistroDetSumAggregateInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.RegistroDetGroupByArgs>;
+
+export const RegistroDetGroupByZodSchema = z.object({ where: RegistroDetWhereInputObjectSchema.optional(), orderBy: z.union([RegistroDetOrderByWithAggregationInputObjectSchema, RegistroDetOrderByWithAggregationInputObjectSchema.array()]).optional(), having: RegistroDetScalarWhereWithAggregatesInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), by: z.array(RegistroDetScalarFieldEnumSchema), _count: z.union([ z.literal(true), RegistroDetCountAggregateInputObjectSchema ]).optional(), _min: RegistroDetMinAggregateInputObjectSchema.optional(), _max: RegistroDetMaxAggregateInputObjectSchema.optional(), _avg: RegistroDetAvgAggregateInputObjectSchema.optional(), _sum: RegistroDetSumAggregateInputObjectSchema.optional() }).strict();
