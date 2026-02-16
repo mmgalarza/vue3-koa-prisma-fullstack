@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: API de Comandas - Módulo de Cocina
+  description: Gestión de flujo de trabajo de cocina, asignación de cocineros y control de estados de comandas.
+  version: 1.0.0
+
+servers:
+  - url: /api/v1/comandas
+    description: Servidor local de desarrollo
+
+paths:
+  /:
+    post:
+      summary: Crear una nueva comanda
+      tags: [Comandas]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrearComandaInput'
+      responses:
+        '201':
+          description: Comanda creada exitosamente
+        '400':
+          description: Datos de entrada inválidos
+
+    get:
+      summary: Obtener todas las comandas del tablero
+      tags: [Comandas]
+      responses:
+        '200':
+          description: Lista de comandas activas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComandaOutput'
+
+  /{id}:
+    get:
+      summary: Obtener detalle de una comanda
+      tags: [Comandas]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Datos de la comanda
+        '404':
+          description: Comanda no encontrada
+
+    delete:
+      summary: Anular una comanda
+      tags: [Comandas]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Comanda anulada correctamente
+
+  /estado/{estado}:
+    get:
+      summary: Filtrar comandas por estado
+      tags: [Comandas]
+      parameters:
+        - name: estado
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/EstadoComanda'
+      responses:
+        '200':
+          description: Lista filtrada
+
+  /coger:
+    patch:
+      summary: Cocinero reclama un producto
+      tags: [Acciones de Cocina]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocineroComandaProductoInput'
+      responses:
+        '200':
+          description: Producto asignado
+
+  /servir:
+    patch:
+      summary: Actualizar cantidad servida
+      tags: [Acciones de Cocina]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActualizarComandaProductoInput'
+      responses:
+        '200':
+          description: Avance registrado
+
+  /liberar:
+    patch:
+      summary: Liberar producto de estación
+      tags: [Acciones de Cocina]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocineroComandaProductoInput'
+      responses:
+        '200':
+          description: Producto liberado
+
+components:
+  schemas:
+    EstadoComanda:
+      type: string
+      enum: [PENDIENTE, SINCOCINA, FINALIZADA, ENTREGADA, ANULADA]
+
+    CrearComandaInput:
+      type: object
+      required: [idOperacion, productos]
+      properties:
+        idOperacion:
+          type: integer
+        productos:
+          type: array
+          items:
+            type: object
+            properties:
+              idProducto:
+                type: integer
+              pedido:
+                type: integer
+                minimum: 1
+
+    CocineroComandaProductoInput:
+      type: object
+      required: [idComanda, idProducto, idCocinero]
+      properties:
+        idComanda:
+          type: integer
+        idProducto:
+          type: integer
+        idCocinero:
+          type: integer
+
+    ActualizarComandaProductoInput:
+      type: object
+      required: [idComanda, idProducto]
+      properties:
+        idComanda:
+          type: integer
+        idProducto:
+          type: integer
+        pedido:
+          type: integer
+        servido:
+          type: integer
+        idCocinero:
+          type: integer
+
+    ComandaOutput:
+      type: object
+      properties:
+        idOperacion:
+          type: integer
+        estado:
+          $ref: '#/components/schemas/EstadoComanda'
+        productos:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComandaProductoOutput'
+
+    ComandaProductoOutput:
+      type: object
+      properties:
+        idProducto:
+          type: integer
+        pedido:
+          type: integer
+        servido:
+          type: integer
+        idCocinero:
+          type: integer
+          nullable: true

@@ -280,6 +280,23 @@ export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
+export type EnumEstadoComandaFilter<$PrismaModel = never> = {
+  equals?: $Enums.EstadoComanda | Prisma.EnumEstadoComandaFieldRefInput<$PrismaModel>
+  in?: $Enums.EstadoComanda[] | Prisma.ListEnumEstadoComandaFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EstadoComanda[] | Prisma.ListEnumEstadoComandaFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEstadoComandaFilter<$PrismaModel> | $Enums.EstadoComanda
+}
+
+export type EnumEstadoComandaWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EstadoComanda | Prisma.EnumEstadoComandaFieldRefInput<$PrismaModel>
+  in?: $Enums.EstadoComanda[] | Prisma.ListEnumEstadoComandaFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EstadoComanda[] | Prisma.ListEnumEstadoComandaFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEstadoComandaWithAggregatesFilter<$PrismaModel> | $Enums.EstadoComanda
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEstadoComandaFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEstadoComandaFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -557,6 +574,23 @@ export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumEstadoComandaFilter<$PrismaModel = never> = {
+  equals?: $Enums.EstadoComanda | Prisma.EnumEstadoComandaFieldRefInput<$PrismaModel>
+  in?: $Enums.EstadoComanda[] | Prisma.ListEnumEstadoComandaFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EstadoComanda[] | Prisma.ListEnumEstadoComandaFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEstadoComandaFilter<$PrismaModel> | $Enums.EstadoComanda
+}
+
+export type NestedEnumEstadoComandaWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EstadoComanda | Prisma.EnumEstadoComandaFieldRefInput<$PrismaModel>
+  in?: $Enums.EstadoComanda[] | Prisma.ListEnumEstadoComandaFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EstadoComanda[] | Prisma.ListEnumEstadoComandaFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEstadoComandaWithAggregatesFilter<$PrismaModel> | $Enums.EstadoComanda
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEstadoComandaFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEstadoComandaFilter<$PrismaModel>
 }
 
 

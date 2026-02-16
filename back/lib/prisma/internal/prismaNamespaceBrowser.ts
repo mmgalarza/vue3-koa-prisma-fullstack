@@ -58,7 +58,10 @@ export const ModelName = {
   Productos: 'Productos',
   ProductoImagenes: 'ProductoImagenes',
   Operaciones: 'Operaciones',
-  OperacionDetalle: 'OperacionDetalle'
+  OperacionDetalle: 'OperacionDetalle',
+  Cocinero: 'Cocinero',
+  Comanda: 'Comanda',
+  ComandaProductos: 'ComandaProductos'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -189,6 +192,39 @@ export const OperacionDetalleScalarFieldEnum = {
 } as const
 
 export type OperacionDetalleScalarFieldEnum = (typeof OperacionDetalleScalarFieldEnum)[keyof typeof OperacionDetalleScalarFieldEnum]
+
+
+export const CocineroScalarFieldEnum = {
+  idCocinero: 'idCocinero',
+  nombre: 'nombre',
+  activo: 'activo',
+  createdAt: 'createdAt'
+} as const
+
+export type CocineroScalarFieldEnum = (typeof CocineroScalarFieldEnum)[keyof typeof CocineroScalarFieldEnum]
+
+
+export const ComandaScalarFieldEnum = {
+  id: 'id',
+  idOperacion: 'idOperacion',
+  estado: 'estado',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ComandaScalarFieldEnum = (typeof ComandaScalarFieldEnum)[keyof typeof ComandaScalarFieldEnum]
+
+
+export const ComandaProductosScalarFieldEnum = {
+  id: 'id',
+  idComanda: 'idComanda',
+  idProducto: 'idProducto',
+  pedido: 'pedido',
+  servido: 'servido',
+  idCocinero: 'idCocinero'
+} as const
+
+export type ComandaProductosScalarFieldEnum = (typeof ComandaProductosScalarFieldEnum)[keyof typeof ComandaProductosScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -34,3 +34,14 @@ export const TCategoria = {
 } as const
 
 export type TCategoria = (typeof TCategoria)[keyof typeof TCategoria]
+
+
+export const EstadoComanda = {
+  PENDIENTE: 'PENDIENTE',
+  SINCOCINA: 'SINCOCINA',
+  FINALIZADA: 'FINALIZADA',
+  ENTREGADA: 'ENTREGADA',
+  ANULADA: 'ANULADA'
+} as const
+
+export type EstadoComanda = (typeof EstadoComanda)[keyof typeof EstadoComanda]

@@ -6,39 +6,51 @@ import { requireAdmin } from '@modulos/usuarios/middleware';
 const router = new Router({ prefix: '/api/operaciones' });
 
 /* ───────────────────────────────
-   RUTAS PÚBLICAS (LECTURA)
+   🚀 RUTA PRINCIPAL KIOSKO (ATÓMICA)
+   Envío de cabecera y detalles en un solo paso.
 ─────────────────────────────── */
+
+// Este es el nuevo endpoint "One-Shot" que evita errores de concurrencia
+router.post('/full', OperacionController.checkoutCompleto);
+
 
 /* ───────────────────────────────
-   RUTAS PRIVADAS (ADMIN / USUARIO)
+   🛒 RUTAS GESTIÓN PASO A PASO (LEGACY/ADMIN)
+   Útiles para editar carritos guardados o flujos manuales.
 ─────────────────────────────── */
-router.use(authMiddleware); // todas requieren autenticación
 
-// LISTAR operaciones por idCliente con page y limit
-router.get('/cliente/:idCliente', OperacionController.listByIdCliente);
-router.get('/:id', OperacionController.getById);
-
-
-// CREAR operación BORRADOR (usuario registrado)
+// Iniciar operación borrador
 router.post('/', OperacionController.create);
 
-// CONFIRMAR operación (usuario registrado)
-router.post('/:id/confirmar', OperacionController.confirmarOperacion);
-
-// DETALLES DE OPERACIÓN
+// Gestión de ítems individuales
 router.post('/:id/detalles', OperacionController.addDetalle);
 router.patch('/:id/detalles/:idDetalle', OperacionController.updateDetalle);
 router.delete('/:id/detalles/:idDetalle', OperacionController.removeDetalle);
 
-// AJUSTAR STOCK (entrada/salida) - por admin
-router.patch('/:id/stock', requireAdmin, OperacionController.ajustarStock);
+// Confirmar venta (Cierre de borrador)
+router.post('/:id/confirmar', OperacionController.confirmarOperacion);
 
-// FINALIZAR operación (admin)
-// router.post('/:id/finalizar', requireAdmin, OperacionController.finalizarOperacion);
 
-// ELIMINAR operación (opcional, admin)
-router.delete('/:id', requireAdmin, OperacionController.delete);
-// LISTAR operaciones del usuario autenticado
-router.get('/', requireAdmin, OperacionController.list);
+/* ───────────────────────────────
+   👤 RUTAS PRIVADAS (USUARIO / PANEL)
+─────────────────────────────── */
+
+// Ver detalle de una operación específica
+router.get('/:id', authMiddleware, OperacionController.getById);
+
+// Historial de compras por cliente
+router.get('/cliente/:idCliente', authMiddleware, OperacionController.listByIdCliente);
+
+
+/* ───────────────────────────────
+   🛡️ RUTAS EXCLUSIVAS ADMIN
+─────────────────────────────── */
+
+// Listado global para auditoría/reportes
+router.get('/', authMiddleware, requireAdmin, OperacionController.list);
+
+// Correcciones manuales de stock y eliminación física
+router.patch('/:id/stock', authMiddleware, requireAdmin, OperacionController.ajustarStock);
+router.delete('/:id', authMiddleware, requireAdmin, OperacionController.delete);
 
 export default router;

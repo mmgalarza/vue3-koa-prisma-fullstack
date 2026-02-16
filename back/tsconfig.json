@@ -15,7 +15,8 @@
       "@prisma/*": ["prisma/*"], // apunta al código fuente de prisma
       "@utils/*": ["utils/*"],     // apunta a la carpeta utils
       "@modulos/*": ["modulos/*"]  // apunta a la carpeta modulos
-    }
+    },
+    "resolveJsonModule": true
   },
   "include": ["src/**/*.ts", "prisma.config.ts", "prisma/**/*.ts", "script.ts", "src/modulos/categorias/dto.ts"],
   "exclude": ["node_modules"]

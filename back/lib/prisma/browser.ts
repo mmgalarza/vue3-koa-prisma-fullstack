@@ -57,3 +57,18 @@ export type Operaciones = Prisma.OperacionesModel
  * 
  */
 export type OperacionDetalle = Prisma.OperacionDetalleModel
+/**
+ * Model Cocinero
+ * 
+ */
+export type Cocinero = Prisma.CocineroModel
+/**
+ * Model Comanda
+ * 
+ */
+export type Comanda = Prisma.ComandaModel
+/**
+ * Model ComandaProductos
+ * 
+ */
+export type ComandaProductos = Prisma.ComandaProductosModel

@@ -10,8 +10,8 @@ const router = new Router({ prefix: '/api/productos' });
 ─────────────────────────────── */
 router.get('/', ProductoController.listarPaginado);
 router.get('/categoria/:idCategoria', ProductoController.getByCategoria);
-router.get('/:id', ProductoController.getById);
 router.get('/all', ProductoController.list);
+router.get('/:id', ProductoController.getById);
 
 /* ───────────────────────────────
    RUTAS PRIVADAS (ADMIN)

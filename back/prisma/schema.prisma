@@ -116,7 +116,7 @@ model Productos {
   // Relaciones existentes
   imagenes            ProductoImagenes[]
   operacionesDetalle  OperacionDetalle[]
-
+  comandasProductos   ComandaProductos[]
   
 }
 
@@ -139,11 +139,14 @@ model Operaciones {
   idOperacion  Int           @id @default(autoincrement())
   estado       EstadoOp
   total        Decimal
-  idCliente    Int
-  cliente      Clientes     @relation(fields: [idCliente], references: [idCliente])
+  // La FK debe ser opcional para permitir el modo anónimo
+  idCliente    Int?
+  cliente      Clientes?     @relation(fields: [idCliente], references: [idCliente])
+
   createdAt    DateTime      @default(now())
   confirmedAt  DateTime?
   operacionesDetalle OperacionDetalle[]
+  comanda          Comanda?
 }
 // Detalles de operaciones
 model OperacionDetalle {
@@ -157,5 +160,62 @@ model OperacionDetalle {
   producto       Productos   @relation(fields: [idProducto], references: [idProducto])
 }
 
+// Cocineros y comandas
 
+enum EstadoComanda {
+  PENDIENTE    // Nadie ha reclamado ningún item
+  SINCOCINA   // Al menos un item ha sido reclamado por un cocinero pero no se ha empezado a preparar
+  FINALIZADA   // Todos los items están en SERVIDO
+  ENTREGADA    // El cliente ya recibió el pedido (Estado final manual)
+  ANULADA      // Comanda anulada (Estado final manual)
+}
 
+// --- MODELOS ---
+
+model Cocinero {
+  idCocinero  Int    @id @default(autoincrement())
+  nombre      String
+  activo      Boolean   @default(true)
+  
+  comandasProductos  ComandaProductos[]
+
+  createdAt DateTime  @default(now())
+}
+
+model Comanda {
+  id           Int        @id @default(autoincrement())
+  
+  // Referencia al origen (Sistema de Ventas)
+  idOperacion  Int           @unique
+  operacion    Operaciones @relation(fields: [idOperacion], references: [idOperacion])
+  
+  // El estado es DERIVADO pero se persiste para consultas eficientes
+  estado       EstadoComanda @default(PENDIENTE)
+
+  productos        ComandaProductos[]
+  
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([estado])
+}
+
+model ComandaProductos {
+  id           Int     @id @default(autoincrement())
+  idComanda    Int
+
+  idProducto   Int
+  producto     Productos   @relation(fields: [idProducto], references: [idProducto])
+
+  pedido     Int
+  servido    Int @default(0)
+  
+  idCocinero   Int?       
+  cocinero     Cocinero?     @relation(fields: [idCocinero], references: [idCocinero])
+  
+  comanda      Comanda    @relation(fields: [idComanda], references: [id], onDelete: Cascade)
+
+  @@index([idProducto])
+  @@index([idComanda])
+  @@index([idCocinero])
+}

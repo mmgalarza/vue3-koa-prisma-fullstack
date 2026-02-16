@@ -520,11 +520,6 @@ export type ClientesSumOrderByAggregateInput = {
   idUsuario?: Prisma.SortOrder
 }
 
-export type ClientesScalarRelationFilter = {
-  is?: Prisma.ClientesWhereInput
-  isNot?: Prisma.ClientesWhereInput
-}
-
 export type ClientesCreateNestedOneWithoutUsuarioInput = {
   create?: Prisma.XOR<Prisma.ClientesCreateWithoutUsuarioInput, Prisma.ClientesUncheckedCreateWithoutUsuarioInput>
   connectOrCreate?: Prisma.ClientesCreateOrConnectWithoutUsuarioInput
@@ -563,10 +558,12 @@ export type ClientesCreateNestedOneWithoutHistorialInput = {
   connect?: Prisma.ClientesWhereUniqueInput
 }
 
-export type ClientesUpdateOneRequiredWithoutHistorialNestedInput = {
+export type ClientesUpdateOneWithoutHistorialNestedInput = {
   create?: Prisma.XOR<Prisma.ClientesCreateWithoutHistorialInput, Prisma.ClientesUncheckedCreateWithoutHistorialInput>
   connectOrCreate?: Prisma.ClientesCreateOrConnectWithoutHistorialInput
   upsert?: Prisma.ClientesUpsertWithoutHistorialInput
+  disconnect?: Prisma.ClientesWhereInput | boolean
+  delete?: Prisma.ClientesWhereInput | boolean
   connect?: Prisma.ClientesWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientesUpdateToOneWithWhereWithoutHistorialInput, Prisma.ClientesUpdateWithoutHistorialInput>, Prisma.ClientesUncheckedUpdateWithoutHistorialInput>
 }

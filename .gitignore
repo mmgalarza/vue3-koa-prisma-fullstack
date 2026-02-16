@@ -7,6 +7,7 @@ node_modules/
 /.vite/
 /prompts/
 /common/
+/personal/
 
 # Logs
 npm-debug.log*

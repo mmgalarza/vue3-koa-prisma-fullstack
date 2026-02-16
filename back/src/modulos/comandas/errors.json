@@ -1,0 +1,5 @@
+{
+  "1": { "message": "El pedido ya está asignado a otro cocinero", "severity": "WARN" },
+  "2": { "message": "El item ya fue servido", "severity": "WARN" },
+  "3": { "message": "La comanda ya está cerrada", "severity": "ERROR" }
+}

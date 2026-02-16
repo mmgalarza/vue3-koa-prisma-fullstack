@@ -39,7 +39,7 @@ export type PaginacionResponse<T> = {
 export const ProductoSchema = z.object({
   idProducto: z.number(),
   nombre: z.string(),
-  descripcion: z.string().nullable(),
+  descripcion: z.string().nullable().optional(),
   activo: z.boolean(),
   precios: z.number().or(z.string()).transform(val => 
     typeof val === 'string' ? parseFloat(val) : val

@@ -90,34 +90,74 @@ export class ProductoService {
 
     return { items, total };
   }
+
   static async list() {
     return prisma.productos.findMany({
       where: { activo: true },
-      include: {
-        categoria: true,
+      select: {
+        idProducto: true,
+        nombre: true,
+        descripcion: true,
+        precios: true,
+        stock: true,
+        activo: true,
+        // Relación con Categoría
+        categoria: {
+          select: {
+            idCategoria: true,
+            nombre: true
+          }
+        },
+        // Relación con Imágenes (Solo la principal/primera)
         imagenes: {
           where: { activo: true },
           orderBy: { orden: 'asc' },
-          take: 1, // solo la imagen principal para la lista
-        },
+          take: 1,
+          select: {
+            idImagen: true,
+            url: true,
+            orden: true,
+            activo: true
+          }
+        }
       },
+      orderBy: {
+        idProducto: 'desc'
+      }
     });
   }
 
-  static async getByCategoria(idCategoria: number) {
+  static async getByCategoria(_idCategoria: number) {
     return prisma.productos.findMany({
       where: {
-        idCategoria,
+        idCategoria: _idCategoria, // Aseguramos que sea número
         activo: true,
       },
-      include: {
-        categoria: true,
+      select: {        
+        idProducto: true,
+        nombre: true,
+        descripcion: true,
+        precios: true, // Se enviará como String, Zod lo transformará
+        stock: true,
+        activo: true,
+        categoria: {
+          select: {
+            idCategoria: true,
+            nombre: true
+          }
+        },
         imagenes: {
           where: { activo: true },
           orderBy: { orden: 'asc' },
-          take: 1, // solo la imagen principal
-        },
-      },
+          take: 1,
+          select: {
+            idImagen: true,
+            url: true,
+            orden: true,
+            activo: true
+          }
+        }
+      }
     });
   }
 

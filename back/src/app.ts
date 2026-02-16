@@ -16,6 +16,7 @@ import productoIMGRoutes from "@modulos/productoIMG/routes";
 import categoriasRoutes from "@modulos/categorias/routes";
 import docsSpecRoutes from "@modulos/spec/routes";
 import operacionesRoutes from "@modulos/operaciones/routes";
+import comandasRoutes from "@modulos/comandas/routes";
 import perfilRoutes from "@modulos/perfil/routes";
 
 const app = new Koa();
@@ -47,16 +48,24 @@ app.use(async (ctx, next) => {
 });
 
 // -------- CORS --------
-const localhostPortRange = /^http:\/\/localhost:(517[3-4])$/;
 app.use(
   cors({
     origin: (ctx) => {
-      const requestOrigin = ctx.request.header.origin;
-      if (!requestOrigin) return "*";
-      if (localhostPortRange.test(requestOrigin)) return requestOrigin;
-      return "";
+      const origin = ctx.get("Origin");
+      if (!origin) return "*";
+
+      // Permitir localhost, 127.0.0.1 y cualquier IP de red local (192.168.x.x o 10.x.x.x)
+      const isLocal = /localhost|127\.0\.0\.1|^http:\/\/192\.168\.|^http:\/\/10\./.test(origin);
+      
+      if (isLocal) {
+        return origin; // 🚩 Devuelve el origen exacto para que el navegador lo acepte
+      }
+      
+      return ""; // Rechazar otros
     },
     credentials: true,
+    allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowHeaders: ["Content-Type", "Authorization", "Accept"],
   })
 );
 
@@ -75,6 +84,7 @@ app.use(productosRoutes.routes()).use(productosRoutes.allowedMethods());
 app.use(categoriasRoutes.routes()).use(categoriasRoutes.allowedMethods());
 app.use(docsSpecRoutes.routes()).use(docsSpecRoutes.allowedMethods());
 app.use(operacionesRoutes.routes()).use(operacionesRoutes.allowedMethods());
+app.use(comandasRoutes.routes()).use(comandasRoutes.allowedMethods());
 app.use(perfilRoutes.routes()).use(perfilRoutes.allowedMethods());
 
 // Depuración de rutas en consola al arrancar

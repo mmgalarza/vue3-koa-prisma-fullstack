@@ -86,3 +86,82 @@ FRONT, VITE, SPA, VUE3+, VUEFITY3.5+, PUG, ZOD, Backend Propio.
 #context!
 
 
+----
+[
+{"1": "La comunicacion esta regulada por una o mas reglas preestablecidas aqui."},
+{"2": "Nunca asumes, ni supones, ni anticipas nada en absoluto."},
+{"3": "La respuesta libre nunca se emite automaticamente."},
+{"4": "La respuesta al #input! siempre es el estado: {inputs: #cntInput, dudas: #cntDudas, salidas: #cntOutputs, propuesta: #cntPropuestas}"},
+{"4": "La ultima palabra siempre es un comando."},
+{"5": "La sintaxis es: #comando!, donde 'comando' es la orden."},
+{"6": "#input! (preestablecido por omision de comando en toda entrada de datos) indica que la IA solo debe entender."},
+{"7": "#codigo! Indica que la IA debe responder con el código o script solicitado."},
+{"8": "#duda! Indica que deseo conocer la duda que tienes."},
+{"9": "#responde! Indica respuesta corta"},
+{"10": "#dime! Indica respuesta libre"},
+{"11": "#que! Indica respuesta muy corta, no supera los 1024 caracteres."},
+{"12": "#rulers! Indica las reglas a seguir para el dialogo."},
+{"13": "#context! Indica el contexto del dialogo."},
+{"14": "#target! Indica el objetivo del dialogo."},
+{"15": "#propuesta! Indica que deseo conocer la propuesta."},
+{"16": "#feedback! Indica que quiero un feedback."},
+]
+#rulers!
+
+
+FRONT, VITE, SPA, REACT, MATERIAL UI, ZOD, Backend Propio.
+DEPENDENCIAS:
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "^4.3.6"
+	
+#context!
+
+Objetivo del Diálogo: Desarrollar una interfaz de usuario (Kiosko) táctil y autoservicio con React y MUI. El sistema debe permitir la navegación de productos, gestión de carrito y un flujo de finalización de compra que condicione el cierre del pedido a la identificación del usuario si este no ha iniciado sesión previamente.
+
+#input!
+
+--------------
+[
+{"1": "La comunicacion esta regulada por una o mas reglas preestablecidas aqui."},
+{"2": "Nunca asumes, ni supones, ni anticipas nada en absoluto."},
+{"3": "La respuesta libre nunca se emite automaticamente."},
+{"4": "La respuesta al #input! siempre es el estado: {inputs: #cntInput, dudas: #cntDudas, salidas: #cntOutputs, propuesta: #cntPropuestas}"},
+{"4": "La ultima palabra siempre es un comando."},
+{"5": "La sintaxis es: #comando!, donde 'comando' es la orden."},
+{"6": "#input! (preestablecido por omision de comando en toda entrada de datos) indica que la IA solo debe entender."},
+{"7": "#codigo! Indica que la IA debe responder con el código o script solicitado."},
+{"8": "#duda! Indica que deseo conocer la duda que tienes."},
+{"9": "#responde! Indica respuesta corta"},
+{"10": "#dime! Indica respuesta libre"},
+{"11": "#que! Indica respuesta muy corta, no supera los 1024 caracteres."},
+{"12": "#rulers! Indica las reglas a seguir para el dialogo."},
+{"13": "#context! Indica el contexto del dialogo."},
+{"14": "#target! Indica el objetivo del dialogo."},
+{"15": "#propuesta! Indica que deseo conocer la propuesta."},
+{"16": "#feedback! Indica que quiero un feedback."},
+]
+#rulers!
+
+BACKEND, NODETS, KOA, ZOD, PRISMA, POSTGRES
+FRONT, VITE, SPA, SVELTE, SKELETON UI, ZOD, Backend Propio.
+	
+#context!
+
+Subdominio: cocina
+
+Desarrollar una interface para *el cocinero*.
+1. *vista* muestra las comandas pendientes, las abiertas y las cerradas. 
+2. *interacion*, excluye una comanda pendientes o abierta, realiza el checking de cada items listo y, la cierra cuando esta completa, o la deja abierta. no puede coger una comanda excluida, para evitar que dos cocineros preparen la misma comanda.
+
+#target!
+
+Desarrollar una interface para *el despachante*.
+3. *vista* muestra los tickets que pendientes, listos y entregados.
+4. *interaccion* coge un ticket listo y, lo comprueba con el cliente, si el cliente confirma, lo entrega.
+
+#target!

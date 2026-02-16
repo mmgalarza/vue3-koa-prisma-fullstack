@@ -197,7 +197,7 @@ export type OperacionesGroupByOutputType = {
   idOperacion: number
   estado: $Enums.EstadoOp
   total: runtime.Decimal
-  idCliente: number
+  idCliente: number | null
   createdAt: Date
   confirmedAt: Date | null
   _count: OperacionesCountAggregateOutputType | null
@@ -229,22 +229,24 @@ export type OperacionesWhereInput = {
   idOperacion?: Prisma.IntFilter<"Operaciones"> | number
   estado?: Prisma.EnumEstadoOpFilter<"Operaciones"> | $Enums.EstadoOp
   total?: Prisma.DecimalFilter<"Operaciones"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  idCliente?: Prisma.IntFilter<"Operaciones"> | number
+  idCliente?: Prisma.IntNullableFilter<"Operaciones"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Operaciones"> | Date | string
   confirmedAt?: Prisma.DateTimeNullableFilter<"Operaciones"> | Date | string | null
-  cliente?: Prisma.XOR<Prisma.ClientesScalarRelationFilter, Prisma.ClientesWhereInput>
+  cliente?: Prisma.XOR<Prisma.ClientesNullableScalarRelationFilter, Prisma.ClientesWhereInput> | null
   operacionesDetalle?: Prisma.OperacionDetalleListRelationFilter
+  comanda?: Prisma.XOR<Prisma.ComandaNullableScalarRelationFilter, Prisma.ComandaWhereInput> | null
 }
 
 export type OperacionesOrderByWithRelationInput = {
   idOperacion?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   total?: Prisma.SortOrder
-  idCliente?: Prisma.SortOrder
+  idCliente?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   confirmedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cliente?: Prisma.ClientesOrderByWithRelationInput
   operacionesDetalle?: Prisma.OperacionDetalleOrderByRelationAggregateInput
+  comanda?: Prisma.ComandaOrderByWithRelationInput
 }
 
 export type OperacionesWhereUniqueInput = Prisma.AtLeast<{
@@ -254,18 +256,19 @@ export type OperacionesWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.OperacionesWhereInput | Prisma.OperacionesWhereInput[]
   estado?: Prisma.EnumEstadoOpFilter<"Operaciones"> | $Enums.EstadoOp
   total?: Prisma.DecimalFilter<"Operaciones"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  idCliente?: Prisma.IntFilter<"Operaciones"> | number
+  idCliente?: Prisma.IntNullableFilter<"Operaciones"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Operaciones"> | Date | string
   confirmedAt?: Prisma.DateTimeNullableFilter<"Operaciones"> | Date | string | null
-  cliente?: Prisma.XOR<Prisma.ClientesScalarRelationFilter, Prisma.ClientesWhereInput>
+  cliente?: Prisma.XOR<Prisma.ClientesNullableScalarRelationFilter, Prisma.ClientesWhereInput> | null
   operacionesDetalle?: Prisma.OperacionDetalleListRelationFilter
+  comanda?: Prisma.XOR<Prisma.ComandaNullableScalarRelationFilter, Prisma.ComandaWhereInput> | null
 }, "idOperacion">
 
 export type OperacionesOrderByWithAggregationInput = {
   idOperacion?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   total?: Prisma.SortOrder
-  idCliente?: Prisma.SortOrder
+  idCliente?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   confirmedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OperacionesCountOrderByAggregateInput
@@ -282,7 +285,7 @@ export type OperacionesScalarWhereWithAggregatesInput = {
   idOperacion?: Prisma.IntWithAggregatesFilter<"Operaciones"> | number
   estado?: Prisma.EnumEstadoOpWithAggregatesFilter<"Operaciones"> | $Enums.EstadoOp
   total?: Prisma.DecimalWithAggregatesFilter<"Operaciones"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  idCliente?: Prisma.IntWithAggregatesFilter<"Operaciones"> | number
+  idCliente?: Prisma.IntNullableWithAggregatesFilter<"Operaciones"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Operaciones"> | Date | string
   confirmedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Operaciones"> | Date | string | null
 }
@@ -292,18 +295,20 @@ export type OperacionesCreateInput = {
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   confirmedAt?: Date | string | null
-  cliente: Prisma.ClientesCreateNestedOneWithoutHistorialInput
+  cliente?: Prisma.ClientesCreateNestedOneWithoutHistorialInput
   operacionesDetalle?: Prisma.OperacionDetalleCreateNestedManyWithoutOperacionInput
+  comanda?: Prisma.ComandaCreateNestedOneWithoutOperacionInput
 }
 
 export type OperacionesUncheckedCreateInput = {
   idOperacion?: number
   estado: $Enums.EstadoOp
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  idCliente: number
+  idCliente?: number | null
   createdAt?: Date | string
   confirmedAt?: Date | string | null
   operacionesDetalle?: Prisma.OperacionDetalleUncheckedCreateNestedManyWithoutOperacionInput
+  comanda?: Prisma.ComandaUncheckedCreateNestedOneWithoutOperacionInput
 }
 
 export type OperacionesUpdateInput = {
@@ -311,25 +316,27 @@ export type OperacionesUpdateInput = {
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cliente?: Prisma.ClientesUpdateOneRequiredWithoutHistorialNestedInput
+  cliente?: Prisma.ClientesUpdateOneWithoutHistorialNestedInput
   operacionesDetalle?: Prisma.OperacionDetalleUpdateManyWithoutOperacionNestedInput
+  comanda?: Prisma.ComandaUpdateOneWithoutOperacionNestedInput
 }
 
 export type OperacionesUncheckedUpdateInput = {
   idOperacion?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoOpFieldUpdateOperationsInput | $Enums.EstadoOp
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  idCliente?: Prisma.IntFieldUpdateOperationsInput | number
+  idCliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   operacionesDetalle?: Prisma.OperacionDetalleUncheckedUpdateManyWithoutOperacionNestedInput
+  comanda?: Prisma.ComandaUncheckedUpdateOneWithoutOperacionNestedInput
 }
 
 export type OperacionesCreateManyInput = {
   idOperacion?: number
   estado: $Enums.EstadoOp
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  idCliente: number
+  idCliente?: number | null
   createdAt?: Date | string
   confirmedAt?: Date | string | null
 }
@@ -345,7 +352,7 @@ export type OperacionesUncheckedUpdateManyInput = {
   idOperacion?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoOpFieldUpdateOperationsInput | $Enums.EstadoOp
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  idCliente?: Prisma.IntFieldUpdateOperationsInput | number
+  idCliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -468,12 +475,27 @@ export type OperacionesUpdateOneRequiredWithoutOperacionesDetalleNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OperacionesUpdateToOneWithWhereWithoutOperacionesDetalleInput, Prisma.OperacionesUpdateWithoutOperacionesDetalleInput>, Prisma.OperacionesUncheckedUpdateWithoutOperacionesDetalleInput>
 }
 
+export type OperacionesCreateNestedOneWithoutComandaInput = {
+  create?: Prisma.XOR<Prisma.OperacionesCreateWithoutComandaInput, Prisma.OperacionesUncheckedCreateWithoutComandaInput>
+  connectOrCreate?: Prisma.OperacionesCreateOrConnectWithoutComandaInput
+  connect?: Prisma.OperacionesWhereUniqueInput
+}
+
+export type OperacionesUpdateOneRequiredWithoutComandaNestedInput = {
+  create?: Prisma.XOR<Prisma.OperacionesCreateWithoutComandaInput, Prisma.OperacionesUncheckedCreateWithoutComandaInput>
+  connectOrCreate?: Prisma.OperacionesCreateOrConnectWithoutComandaInput
+  upsert?: Prisma.OperacionesUpsertWithoutComandaInput
+  connect?: Prisma.OperacionesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OperacionesUpdateToOneWithWhereWithoutComandaInput, Prisma.OperacionesUpdateWithoutComandaInput>, Prisma.OperacionesUncheckedUpdateWithoutComandaInput>
+}
+
 export type OperacionesCreateWithoutClienteInput = {
   estado: $Enums.EstadoOp
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   confirmedAt?: Date | string | null
   operacionesDetalle?: Prisma.OperacionDetalleCreateNestedManyWithoutOperacionInput
+  comanda?: Prisma.ComandaCreateNestedOneWithoutOperacionInput
 }
 
 export type OperacionesUncheckedCreateWithoutClienteInput = {
@@ -483,6 +505,7 @@ export type OperacionesUncheckedCreateWithoutClienteInput = {
   createdAt?: Date | string
   confirmedAt?: Date | string | null
   operacionesDetalle?: Prisma.OperacionDetalleUncheckedCreateNestedManyWithoutOperacionInput
+  comanda?: Prisma.ComandaUncheckedCreateNestedOneWithoutOperacionInput
 }
 
 export type OperacionesCreateOrConnectWithoutClienteInput = {
@@ -518,7 +541,7 @@ export type OperacionesScalarWhereInput = {
   idOperacion?: Prisma.IntFilter<"Operaciones"> | number
   estado?: Prisma.EnumEstadoOpFilter<"Operaciones"> | $Enums.EstadoOp
   total?: Prisma.DecimalFilter<"Operaciones"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  idCliente?: Prisma.IntFilter<"Operaciones"> | number
+  idCliente?: Prisma.IntNullableFilter<"Operaciones"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Operaciones"> | Date | string
   confirmedAt?: Prisma.DateTimeNullableFilter<"Operaciones"> | Date | string | null
 }
@@ -528,16 +551,18 @@ export type OperacionesCreateWithoutOperacionesDetalleInput = {
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   confirmedAt?: Date | string | null
-  cliente: Prisma.ClientesCreateNestedOneWithoutHistorialInput
+  cliente?: Prisma.ClientesCreateNestedOneWithoutHistorialInput
+  comanda?: Prisma.ComandaCreateNestedOneWithoutOperacionInput
 }
 
 export type OperacionesUncheckedCreateWithoutOperacionesDetalleInput = {
   idOperacion?: number
   estado: $Enums.EstadoOp
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  idCliente: number
+  idCliente?: number | null
   createdAt?: Date | string
   confirmedAt?: Date | string | null
+  comanda?: Prisma.ComandaUncheckedCreateNestedOneWithoutOperacionInput
 }
 
 export type OperacionesCreateOrConnectWithoutOperacionesDetalleInput = {
@@ -561,16 +586,72 @@ export type OperacionesUpdateWithoutOperacionesDetalleInput = {
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cliente?: Prisma.ClientesUpdateOneRequiredWithoutHistorialNestedInput
+  cliente?: Prisma.ClientesUpdateOneWithoutHistorialNestedInput
+  comanda?: Prisma.ComandaUpdateOneWithoutOperacionNestedInput
 }
 
 export type OperacionesUncheckedUpdateWithoutOperacionesDetalleInput = {
   idOperacion?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoOpFieldUpdateOperationsInput | $Enums.EstadoOp
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  idCliente?: Prisma.IntFieldUpdateOperationsInput | number
+  idCliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comanda?: Prisma.ComandaUncheckedUpdateOneWithoutOperacionNestedInput
+}
+
+export type OperacionesCreateWithoutComandaInput = {
+  estado: $Enums.EstadoOp
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  confirmedAt?: Date | string | null
+  cliente?: Prisma.ClientesCreateNestedOneWithoutHistorialInput
+  operacionesDetalle?: Prisma.OperacionDetalleCreateNestedManyWithoutOperacionInput
+}
+
+export type OperacionesUncheckedCreateWithoutComandaInput = {
+  idOperacion?: number
+  estado: $Enums.EstadoOp
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  idCliente?: number | null
+  createdAt?: Date | string
+  confirmedAt?: Date | string | null
+  operacionesDetalle?: Prisma.OperacionDetalleUncheckedCreateNestedManyWithoutOperacionInput
+}
+
+export type OperacionesCreateOrConnectWithoutComandaInput = {
+  where: Prisma.OperacionesWhereUniqueInput
+  create: Prisma.XOR<Prisma.OperacionesCreateWithoutComandaInput, Prisma.OperacionesUncheckedCreateWithoutComandaInput>
+}
+
+export type OperacionesUpsertWithoutComandaInput = {
+  update: Prisma.XOR<Prisma.OperacionesUpdateWithoutComandaInput, Prisma.OperacionesUncheckedUpdateWithoutComandaInput>
+  create: Prisma.XOR<Prisma.OperacionesCreateWithoutComandaInput, Prisma.OperacionesUncheckedCreateWithoutComandaInput>
+  where?: Prisma.OperacionesWhereInput
+}
+
+export type OperacionesUpdateToOneWithWhereWithoutComandaInput = {
+  where?: Prisma.OperacionesWhereInput
+  data: Prisma.XOR<Prisma.OperacionesUpdateWithoutComandaInput, Prisma.OperacionesUncheckedUpdateWithoutComandaInput>
+}
+
+export type OperacionesUpdateWithoutComandaInput = {
+  estado?: Prisma.EnumEstadoOpFieldUpdateOperationsInput | $Enums.EstadoOp
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cliente?: Prisma.ClientesUpdateOneWithoutHistorialNestedInput
+  operacionesDetalle?: Prisma.OperacionDetalleUpdateManyWithoutOperacionNestedInput
+}
+
+export type OperacionesUncheckedUpdateWithoutComandaInput = {
+  idOperacion?: Prisma.IntFieldUpdateOperationsInput | number
+  estado?: Prisma.EnumEstadoOpFieldUpdateOperationsInput | $Enums.EstadoOp
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  idCliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  operacionesDetalle?: Prisma.OperacionDetalleUncheckedUpdateManyWithoutOperacionNestedInput
 }
 
 export type OperacionesCreateManyClienteInput = {
@@ -587,6 +668,7 @@ export type OperacionesUpdateWithoutClienteInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   operacionesDetalle?: Prisma.OperacionDetalleUpdateManyWithoutOperacionNestedInput
+  comanda?: Prisma.ComandaUpdateOneWithoutOperacionNestedInput
 }
 
 export type OperacionesUncheckedUpdateWithoutClienteInput = {
@@ -596,6 +678,7 @@ export type OperacionesUncheckedUpdateWithoutClienteInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   operacionesDetalle?: Prisma.OperacionDetalleUncheckedUpdateManyWithoutOperacionNestedInput
+  comanda?: Prisma.ComandaUncheckedUpdateOneWithoutOperacionNestedInput
 }
 
 export type OperacionesUncheckedUpdateManyWithoutClienteInput = {
@@ -644,8 +727,9 @@ export type OperacionesSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   idCliente?: boolean
   createdAt?: boolean
   confirmedAt?: boolean
-  cliente?: boolean | Prisma.ClientesDefaultArgs<ExtArgs>
+  cliente?: boolean | Prisma.Operaciones$clienteArgs<ExtArgs>
   operacionesDetalle?: boolean | Prisma.Operaciones$operacionesDetalleArgs<ExtArgs>
+  comanda?: boolean | Prisma.Operaciones$comandaArgs<ExtArgs>
   _count?: boolean | Prisma.OperacionesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["operaciones"]>
 
@@ -656,7 +740,7 @@ export type OperacionesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   idCliente?: boolean
   createdAt?: boolean
   confirmedAt?: boolean
-  cliente?: boolean | Prisma.ClientesDefaultArgs<ExtArgs>
+  cliente?: boolean | Prisma.Operaciones$clienteArgs<ExtArgs>
 }, ExtArgs["result"]["operaciones"]>
 
 export type OperacionesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -666,7 +750,7 @@ export type OperacionesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   idCliente?: boolean
   createdAt?: boolean
   confirmedAt?: boolean
-  cliente?: boolean | Prisma.ClientesDefaultArgs<ExtArgs>
+  cliente?: boolean | Prisma.Operaciones$clienteArgs<ExtArgs>
 }, ExtArgs["result"]["operaciones"]>
 
 export type OperacionesSelectScalar = {
@@ -680,28 +764,30 @@ export type OperacionesSelectScalar = {
 
 export type OperacionesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idOperacion" | "estado" | "total" | "idCliente" | "createdAt" | "confirmedAt", ExtArgs["result"]["operaciones"]>
 export type OperacionesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  cliente?: boolean | Prisma.ClientesDefaultArgs<ExtArgs>
+  cliente?: boolean | Prisma.Operaciones$clienteArgs<ExtArgs>
   operacionesDetalle?: boolean | Prisma.Operaciones$operacionesDetalleArgs<ExtArgs>
+  comanda?: boolean | Prisma.Operaciones$comandaArgs<ExtArgs>
   _count?: boolean | Prisma.OperacionesCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OperacionesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  cliente?: boolean | Prisma.ClientesDefaultArgs<ExtArgs>
+  cliente?: boolean | Prisma.Operaciones$clienteArgs<ExtArgs>
 }
 export type OperacionesIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  cliente?: boolean | Prisma.ClientesDefaultArgs<ExtArgs>
+  cliente?: boolean | Prisma.Operaciones$clienteArgs<ExtArgs>
 }
 
 export type $OperacionesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Operaciones"
   objects: {
-    cliente: Prisma.$ClientesPayload<ExtArgs>
+    cliente: Prisma.$ClientesPayload<ExtArgs> | null
     operacionesDetalle: Prisma.$OperacionDetallePayload<ExtArgs>[]
+    comanda: Prisma.$ComandaPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     idOperacion: number
     estado: $Enums.EstadoOp
     total: runtime.Decimal
-    idCliente: number
+    idCliente: number | null
     createdAt: Date
     confirmedAt: Date | null
   }, ExtArgs["result"]["operaciones"]>
@@ -1098,8 +1184,9 @@ readonly fields: OperacionesFieldRefs;
  */
 export interface Prisma__OperacionesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  cliente<T extends Prisma.ClientesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientesDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientesClient<runtime.Types.Result.GetResult<Prisma.$ClientesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  cliente<T extends Prisma.Operaciones$clienteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Operaciones$clienteArgs<ExtArgs>>): Prisma.Prisma__ClientesClient<runtime.Types.Result.GetResult<Prisma.$ClientesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   operacionesDetalle<T extends Prisma.Operaciones$operacionesDetalleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Operaciones$operacionesDetalleArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OperacionDetallePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  comanda<T extends Prisma.Operaciones$comandaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Operaciones$comandaArgs<ExtArgs>>): Prisma.Prisma__ComandaClient<runtime.Types.Result.GetResult<Prisma.$ComandaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1531,6 +1618,25 @@ export type OperacionesDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * Operaciones.cliente
+ */
+export type Operaciones$clienteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Clientes
+   */
+  select?: Prisma.ClientesSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Clientes
+   */
+  omit?: Prisma.ClientesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClientesInclude<ExtArgs> | null
+  where?: Prisma.ClientesWhereInput
+}
+
+/**
  * Operaciones.operacionesDetalle
  */
 export type Operaciones$operacionesDetalleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1552,6 +1658,25 @@ export type Operaciones$operacionesDetalleArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.OperacionDetalleScalarFieldEnum | Prisma.OperacionDetalleScalarFieldEnum[]
+}
+
+/**
+ * Operaciones.comanda
+ */
+export type Operaciones$comandaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Comanda
+   */
+  select?: Prisma.ComandaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Comanda
+   */
+  omit?: Prisma.ComandaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ComandaInclude<ExtArgs> | null
+  where?: Prisma.ComandaWhereInput
 }
 
 /**
