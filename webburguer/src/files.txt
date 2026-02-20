@@ -1,0 +1,138 @@
+ El volumen de la unidad D es DATOS
+ El n£mero de serie del volumen es: AA7F-A515
+
+ Directorio de D:\vue\webburguer\src
+
+19/02/2026  19:35    <DIR>          .
+19/02/2026  19:35    <DIR>          ..
+17/02/2026  08:25    <DIR>          app
+19/02/2026  19:33               661 App.vue
+17/02/2026  07:58    <DIR>          assets
+19/02/2026  19:35    <DIR>          componentes
+19/02/2026  19:41               126 files.txt
+19/02/2026  09:06               662 main.ts
+17/02/2026  08:48    <DIR>          modulos
+18/02/2026  20:27             1.269 style.css
+19/02/2026  08:46    <DIR>          styles
+17/02/2026  08:51    <DIR>          utils
+               4 archivos          2.718 bytes
+
+ Directorio de D:\vue\webburguer\src\app
+
+17/02/2026  08:25    <DIR>          .
+17/02/2026  08:25    <DIR>          ..
+17/02/2026  08:25    <DIR>          components
+17/02/2026  08:25    <DIR>          layouts
+17/02/2026  08:25    <DIR>          router
+               0 archivos              0 bytes
+
+ Directorio de D:\vue\webburguer\src\app\components
+
+17/02/2026  08:25    <DIR>          .
+17/02/2026  08:25    <DIR>          ..
+               0 archivos              0 bytes
+
+ Directorio de D:\vue\webburguer\src\app\layouts
+
+17/02/2026  08:25    <DIR>          .
+17/02/2026  08:25    <DIR>          ..
+               0 archivos              0 bytes
+
+ Directorio de D:\vue\webburguer\src\app\router
+
+17/02/2026  08:25    <DIR>          .
+17/02/2026  08:25    <DIR>          ..
+               0 archivos              0 bytes
+
+ Directorio de D:\vue\webburguer\src\assets
+
+17/02/2026  07:58    <DIR>          .
+17/02/2026  07:58    <DIR>          ..
+09/02/2026  19:50               496 vue.svg
+               1 archivos            496 bytes
+
+ Directorio de D:\vue\webburguer\src\componentes
+
+19/02/2026  19:35    <DIR>          .
+19/02/2026  19:35    <DIR>          ..
+19/02/2026  19:30             1.973 Footer.vue
+19/02/2026  19:30             1.557 Navbar.vue
+               2 archivos          3.530 bytes
+
+ Directorio de D:\vue\webburguer\src\modulos
+
+17/02/2026  08:48    <DIR>          .
+17/02/2026  08:48    <DIR>          ..
+18/02/2026  19:00    <DIR>          navegador
+               0 archivos              0 bytes
+
+ Directorio de D:\vue\webburguer\src\modulos\navegador
+
+18/02/2026  19:00    <DIR>          .
+18/02/2026  19:00    <DIR>          ..
+19/02/2026  19:21             2.807 Browser.vue
+19/02/2026  19:35    <DIR>          componentes
+18/02/2026  09:55               620 domain.ts
+17/02/2026  11:29    <DIR>          provider
+18/02/2026  09:50             1.381 repository.ts
+18/02/2026  09:55               828 service.ts
+19/02/2026  11:54             5.470 store.ts
+18/02/2026  18:22             3.774 view.vue
+18/02/2026  08:01             1.232 zod.ts
+               7 archivos         16.112 bytes
+
+ Directorio de D:\vue\webburguer\src\modulos\navegador\componentes
+
+19/02/2026  19:35    <DIR>          .
+19/02/2026  19:35    <DIR>          ..
+19/02/2026  13:52             1.558 Breadcrums.vue
+19/02/2026  18:26             2.709 Card.vue
+19/02/2026  12:08             1.160 Search.vue
+19/02/2026  18:51             1.665 Shortcut.vue
+19/02/2026  12:10             1.484 Toolbar.vue
+               5 archivos          8.576 bytes
+
+ Directorio de D:\vue\webburguer\src\modulos\navegador\provider
+
+17/02/2026  11:29    <DIR>          .
+17/02/2026  11:29    <DIR>          ..
+17/02/2026  08:53    <DIR>          private
+18/02/2026  09:48    <DIR>          sanity
+               0 archivos              0 bytes
+
+ Directorio de D:\vue\webburguer\src\modulos\navegador\provider\private
+
+17/02/2026  08:53    <DIR>          .
+17/02/2026  08:53    <DIR>          ..
+17/02/2026  11:16                19 api.ts
+17/02/2026  08:53                 0 schema.zod.ts
+17/02/2026  10:00             1.065 socket-io.ts
+17/02/2026  08:52                 0 types.ts
+               4 archivos          1.084 bytes
+
+ Directorio de D:\vue\webburguer\src\modulos\navegador\provider\sanity
+
+18/02/2026  09:48    <DIR>          .
+18/02/2026  09:48    <DIR>          ..
+17/02/2026  12:32               533 api.ts
+18/02/2026  10:01             2.346 mapper.ts
+17/02/2026  14:01               779 queries.ts
+17/02/2026  10:31               526 zod.ts
+               4 archivos          4.184 bytes
+
+ Directorio de D:\vue\webburguer\src\styles
+
+19/02/2026  08:46    <DIR>          .
+19/02/2026  08:46    <DIR>          ..
+19/02/2026  09:17               596 settings.scss
+               1 archivos            596 bytes
+
+ Directorio de D:\vue\webburguer\src\utils
+
+17/02/2026  08:51    <DIR>          .
+17/02/2026  08:51    <DIR>          ..
+               0 archivos              0 bytes
+
+     Total de archivos en la lista:
+              28 archivos         37.296 bytes
+              44 dirs  847.520.120.832 bytes libres
